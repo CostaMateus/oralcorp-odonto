@@ -1,5 +1,9 @@
 @extends('adminlte::master')
 
+@section("title_prefix", "Confirmação de senha")
+@section("title")
+@section("title_posfix")
+
 @section('adminlte_css')
     @yield('css')
 @stop

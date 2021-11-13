@@ -42,7 +42,7 @@
     @yield('adminlte_css')
 
     {{-- Favicon --}}
-    <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 
 </head>
 
