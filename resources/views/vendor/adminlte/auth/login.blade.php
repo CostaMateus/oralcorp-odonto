@@ -48,8 +48,8 @@
 
         {{-- Email field --}}
         <div class="form-group mb-3">
-            <label for="login" >E-mail</label>
-            <input type="email" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{ old('email') }}" placeholder="Digite seu e-mail" autofocus>
+            <label for="email" >E-mail</label>
+            <input id="email" type="email" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{ old('email') }}" placeholder="Digite seu e-mail" autofocus>
 
             @if($errors->has('email'))
                 <div class="invalid-feedback">
@@ -61,7 +61,7 @@
         {{-- Password field --}}
         <div class="form-group mb-3">
             <label for="password" >Senha</label>
-            <input type="password" name="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" placeholder="Digite sua senha">
+            <input id="password" type="password" name="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" placeholder="Digite sua senha">
 
             @if($errors->has('password'))
                 <div class="invalid-feedback">
