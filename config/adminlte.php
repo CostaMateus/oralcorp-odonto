@@ -51,7 +51,7 @@ return [
     */
 
     'logo'              => '<b>O</b>ral <b>C</b>orp',
-    'logo_img'          => 'images/logo/icon.png',
+    'logo_img'          => 'images/logo/favicon_b.png',
     'logo_img_class'    => 'brand-image',
     'logo_img_xl'       => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -213,7 +213,7 @@ return [
     |
     */
 
-    'enabled_laravel_mix'  => false,
+    'enabled_laravel_mix'  => true,
     'laravel_mix_css_path' => 'css/app.css',
     'laravel_mix_js_path'  => 'js/app.js',
 
