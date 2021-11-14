@@ -1,5 +1,9 @@
 @extends('adminlte::auth.auth-page', ['auth_type' => 'login'])
 
+@section("title_prefix", "Trocar senha")
+@section("title")
+@section("title_posfix")
+
 @php( $password_email_url = View::getSection('password_email_url') ?? config('adminlte.password_email_url', 'password/email') )
 
 @if (config('adminlte.use_route_url', false))
@@ -8,9 +12,10 @@
     @php( $password_email_url = $password_email_url ? url($password_email_url) : '' )
 @endif
 
-@section('auth_header', __('adminlte::adminlte.password_reset_message'))
-
 @section('auth_body')
+    <div class="login-logo text-center mb-3">
+        <img src="{{ asset("images/logo/logo_b.png") }}" alt="Oral Corp" class="w-100">
+    </div>
 
     @if(session('status'))
         <div class="alert alert-success">
@@ -22,14 +27,10 @@
         {{ csrf_field() }}
 
         {{-- Email field --}}
-        <div class="input-group mb-3">
-            <input type="email" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-                   value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
-                </div>
-            </div>
+        <div class="form-group mb-3">
+            <label for="email" >E-mail</label>
+            <input id="email" type="email" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{ old('email') }}" placeholder="Digite seu e-mail" autofocus>
+
             @if($errors->has('email'))
                 <div class="invalid-feedback">
                     <strong>{{ $errors->first('email') }}</strong>
@@ -38,11 +39,16 @@
         </div>
 
         {{-- Send reset link button --}}
-        <button type="submit" class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
-            <span class="fas fa-share-square"></span>
-            {{ __('adminlte::adminlte.send_password_reset_link') }}
-        </button>
+        <div class="form-group mb-0">
+            <button id="btn-submit" type="submit" class="btn btn-oc btn-block ">Enviar link de recuperação</button>
+        </div>
 
     </form>
-
 @stop
+
+@section("footer")
+    <footer class="py-3 text-center text-white" >
+        <p class="h6 mb-0" >&copy; {{ date("Y") }} ORAL CORP ODONTO LTDA – 08.473.814.0001-55. Todos os direitos reservados. Proibida cópia ou reprodução sem autorização.</p>
+        <small class="mb-0" >Powered by <a class="text-light" href="https://www.linkedin.com/in/costamateus6/" target="_blank" rel="noopener noreferrer" >Mateus Costa</a></small>
+    </footer>
+@endsection
