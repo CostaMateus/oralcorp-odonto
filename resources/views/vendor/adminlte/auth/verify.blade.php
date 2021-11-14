@@ -1,6 +1,10 @@
 @extends('adminlte::auth.auth-page', ['auth_type' => 'login'])
 
-@section('auth_header', __('adminlte::adminlte.verify_message'))
+@section("title_prefix", "Verificação de conta")
+@section("title")
+@section("title_posfix")
+
+{{-- @section('auth_header', __('adminlte::adminlte.verify_message')) --}}
 
 @section('auth_body')
 
