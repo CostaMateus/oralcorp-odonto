@@ -11,10 +11,10 @@
 
         @foreach ($treatments as $key => $t)
             <div class="col-lg-3 col-12">
-                <a class="treatment" href="#" data-toggle="modal" data-target="#modal-treatment" data-id="{{ $key }}">
+                <a class="treatment" href="#" data-id="{{ $key }}">
                     <div class="small-box bg-white">
                         <div class="inner text-center">
-                            <img class="img-circle elevation-2 mb-2" src="{{asset('images/home/s.png')}}" width="35" alt="Tratamento">
+                            <img class="img-circle elevation-2 mb-2" src="{{ asset($t["image"]) }}" width="35" alt="Tratamento">
                             <h4 class="mb-0 text-gray-dark">{{ $t["title"] }}</h4>
                             <span class="btn-link">saiba mais</span>
                         </div>
@@ -49,10 +49,10 @@
     //
     const treatments = {!! json_encode($treatments) !!};
 
-    $('#m-title').html(treatments[6]["title"]);
+    // $('#m-title').html(treatments[6]["title"]);
 
-    $('#modal-treatment').show();
+    // $('#modal-treatment').show();
 
-    console.log(treatments[6]);
+    console.log(treatments);
 </script>
 @stop
