@@ -262,7 +262,7 @@ return [
         ],
         [
             'text' => 'Check-in',
-            'url'  => '/chekin',
+            'url'  => '/checkin',
             'icon' => 'fas fa-fw fa-1x fa-map-marker-alt',
         ],
     ],
@@ -302,72 +302,72 @@ return [
     */
 
     'plugins' => [
-        'Datatables' => [
+        'Datatables'  => [
             'active' => false,
-            'files' => [
+            'files'  => [
                 [
-                    'type' => 'js',
-                    'asset' => false,
+                    'type'     => 'js',
+                    'asset'    => false,
                     'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
                 ],
                 [
-                    'type' => 'js',
-                    'asset' => false,
+                    'type'     => 'js',
+                    'asset'    => false,
                     'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
                 ],
                 [
-                    'type' => 'css',
-                    'asset' => false,
+                    'type'     => 'css',
+                    'asset'    => false,
                     'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
                 ],
             ],
         ],
-        'Select2' => [
+        'Select2'     => [
             'active' => false,
-            'files' => [
+            'files'  => [
                 [
-                    'type' => 'js',
-                    'asset' => false,
+                    'type'     => 'js',
+                    'asset'    => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
                 ],
                 [
-                    'type' => 'css',
-                    'asset' => false,
+                    'type'     => 'css',
+                    'asset'    => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
                 ],
             ],
         ],
-        'Chartjs' => [
+        'Chartjs'     => [
             'active' => false,
-            'files' => [
+            'files'  => [
                 [
-                    'type' => 'js',
-                    'asset' => false,
+                    'type'     => 'js',
+                    'asset'    => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js',
                 ],
             ],
         ],
         'Sweetalert2' => [
             'active' => false,
-            'files' => [
+            'files'  => [
                 [
-                    'type' => 'js',
-                    'asset' => false,
+                    'type'     => 'js',
+                    'asset'    => false,
                     'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
                 ],
             ],
         ],
-        'Pace' => [
+        'Pace'        => [
             'active' => false,
-            'files' => [
+            'files'  => [
                 [
-                    'type' => 'css',
-                    'asset' => false,
+                    'type'     => 'css',
+                    'asset'    => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-center-radar.min.css',
                 ],
                 [
-                    'type' => 'js',
-                    'asset' => false,
+                    'type'     => 'js',
+                    'asset'    => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
                 ],
             ],
@@ -389,21 +389,21 @@ return [
 
     'iframe' => [
         'default_tab' => [
-            'url' => null,
+            'url'   => null,
             'title' => null,
         ],
-        'buttons' => [
-            'close' => true,
-            'close_all' => true,
+        'buttons'     => [
+            'close'           => true,
+            'close_all'       => true,
             'close_all_other' => true,
-            'scroll_left' => true,
-            'scroll_right' => true,
-            'fullscreen' => true,
+            'scroll_left'     => true,
+            'scroll_right'    => true,
+            'fullscreen'      => true,
         ],
-        'options' => [
-            'loading_screen' => 1000,
+        'options'     => [
+            'loading_screen'    => 1000,
             'auto_show_new_tab' => true,
-            'use_navbar_items' => true,
+            'use_navbar_items'  => true,
         ],
     ],
 
