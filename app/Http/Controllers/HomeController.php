@@ -24,17 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view("home");
-    }
-
-    public function mySmiles()
-    {
-        $data = [
-            "before" => true,
-            "after"  => false
-        ];
-
-        return view("patient.my_smiles", compact(["data"]));
+        return view("patient.home");
     }
 
     public function treatments()
@@ -77,4 +67,40 @@ class HomeController extends Controller
 
         return view("patient.our_treatments", compact(["treatments"]));
     }
+
+    public function contacts()
+    {
+        return view("patient.home");
+    }
+
+    public function schedule()
+    {
+        return view("patient.home");
+    }
+
+    public function mySmiles()
+    {
+        $data = [
+            "before" => true,
+            "after"  => false
+        ];
+
+        return view("patient.my_smiles", compact(["data"]));
+    }
+
+    public function financial()
+    {
+        return view("patient.home");
+    }
+
+    public function indicate()
+    {
+        return view("patient.home");
+    }
+
+    public function checkin()
+    {
+        return view("patient.home");
+    }
+
 }
