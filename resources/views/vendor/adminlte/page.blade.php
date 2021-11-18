@@ -24,6 +24,10 @@
 
 @section('body')
     <div class="wrapper">
+        {{-- Preloader --}}
+        @hasSection('preloader')
+            @yield('preloader')
+        @endif
 
         {{-- Top Navbar --}}
         @if($layoutHelper->isLayoutTopnavEnabled())
