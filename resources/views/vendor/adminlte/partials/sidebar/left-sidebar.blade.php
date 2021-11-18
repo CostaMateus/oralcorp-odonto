@@ -18,6 +18,19 @@
                 @if(!config('adminlte.sidebar_nav_accordion'))
                     data-accordion="false"
                 @endif>
+
+                {{-- User profile --}}
+                <li>
+                    <div class="user-panel pt-2 pb-3 mb-3 d-flex">
+                        <div class="image">
+                            <img src="{{ asset('images/user/default.png') }}" class="img-circle elevation-2" alt="{{ Auth::user()->name }}">
+                        </div>
+                        <div class="info">
+                            <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                        </div>
+                    </div>
+                </li>
+
                 {{-- Configured sidebar links --}}
                 @each('adminlte::partials.sidebar.menu-item', $adminlte->menu('sidebar'), 'item')
             </ul>
