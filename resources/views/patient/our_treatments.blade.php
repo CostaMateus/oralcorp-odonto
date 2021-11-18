@@ -1,6 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'AdminLTE')
+@section("title_prefix", "Nossos tratamentos")
+@section("title")
+@section("title_posfix")
+
 
 @section('content_header')
     <h1 class="m-0 text-dark">Nossos Tratamentos</h1>
@@ -14,7 +17,7 @@
                 <a class="treatment" href="#" data-id="{{ $key }}">
                     <div class="small-box bg-white">
                         <div class="inner text-center">
-                            <img class="img-circle elevation-2 mb-2" src="{{ asset($t["image"]) }}" width="35" alt="Tratamento">
+                            <img class="img-circle elevation-2 mb-2" src="{{ asset($t["image"]) }}" width="55" alt="Tratamento">
                             <h4 class="mb-0 text-gray-dark">{{ $t["title"] }}</h4>
                             <span class="btn-link">saiba mais</span>
                         </div>
@@ -43,16 +46,16 @@
     </div>
 @stop
 
+@include('patient.footer')
 
 @section('js')
 <script>
-    //
-    const treatments = {!! json_encode($treatments) !!};
+    // const treatments = {!! json_encode($treatments) !!};
 
     // $('#m-title').html(treatments[6]["title"]);
 
     // $('#modal-treatment').show();
 
-    console.log(treatments);
+    // console.log(treatments);
 </script>
 @stop
