@@ -27,6 +27,11 @@ class HomeController extends Controller
         return view("patient.home");
     }
 
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public function treatments()
     {
         $treatments = [
@@ -78,6 +83,11 @@ class HomeController extends Controller
         return view("patient.home");
     }
 
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public function mySmiles()
     {
         $data = [
