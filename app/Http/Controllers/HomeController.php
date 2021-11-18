@@ -76,6 +76,7 @@ class HomeController extends Controller
     public function contacts()
     {
         return view("patient.home");
+        //teste email notifications
     }
 
     public function schedule()
