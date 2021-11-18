@@ -13,13 +13,16 @@
     <div class="row">
 
         @foreach ($treatments as $key => $t)
-            <div class="col-lg-3 col-12">
-                <a class="treatment" href="#" data-id="{{ $key }}">
+            <div class="col-12 md-6 lg-3">
+                <a class="treatment" href="#"
+                    data-id="{{ $key }}"
+                    data-description="{{ $t["description"]}}">
                     <div class="small-box bg-white">
                         <div class="inner text-center">
                             <img class="img-circle elevation-2 mb-2" src="{{ asset($t["image"]) }}" width="55" alt="Tratamento">
                             <h4 class="mb-0 text-gray-dark">{{ $t["title"] }}</h4>
-                            <span class="btn-link">saiba mais</span>
+                            <span class="btn-link" >
+                                saiba mais</span>
                         </div>
                     </div>
                 </a>
@@ -57,5 +60,16 @@
     // $('#modal-treatment').show();
 
     // console.log(treatments);
+
+    // Modal-Tratamentos
+        $(document).on("click", ".treatment", function() {
+            let treatment_id = $(this).data("pacient_id");
+            let name       = $(this).data("name");
+            $("#hf-pacient_id").val(data-id);
+            $("#hf-pacient_name").val(name);
+            clearInvald();
+            clearStatus();
+            $("#treatment").modal("show");
+
 </script>
 @stop
