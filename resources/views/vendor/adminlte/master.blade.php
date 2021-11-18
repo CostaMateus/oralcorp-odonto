@@ -44,6 +44,8 @@
     {{-- Favicon --}}
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 
+    {{-- PWA --}}
+    @laravelPWA
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>

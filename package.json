@@ -23,7 +23,6 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.4",
-        "icheck-bootstrap": "^3.0.1",
         "overlayscrollbars": "^1.13.1"
     }
 }
