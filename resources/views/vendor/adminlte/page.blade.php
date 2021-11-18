@@ -11,6 +11,17 @@
 
 @section('body_data', $layoutHelper->makeBodyData())
 
+@section('content_top_nav_left')
+    <li class="nav-item">
+        <a href="/" class="nav-link">Início</a>
+    </li>
+@stop
+@section('content_top_nav_center')
+    <li class="nav-item">
+        <img class="brand-image" src="{{ asset('images/logo/logo_b.png') }}" alt="Oral Corp" height="40" >
+    </li>
+@stop
+
 @section('body')
     <div class="wrapper">
 
