@@ -37,12 +37,9 @@
             <label for="clinic" >Unidade</label>
             <select id="clinic" name="clinic" class="form-control" >
                 <option value="0" selected disabled >Selecione...</option>
-                <option value="1" >Teste 1</option>
-                <option value="2" >Teste 2</option>
-                <option value="3" >Teste 3</option>
-                {{-- @foreach ($clinics as $c)
+                @foreach ($clinics as $c)
                     <option value="{{ $c->code }}" >{{ $c->name }}</option>
-                @endforeach --}}
+                @endforeach
             </select>
         </div>
 
