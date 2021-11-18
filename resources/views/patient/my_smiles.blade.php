@@ -12,25 +12,29 @@
 
         <div class="col-12 col-md-6">
             <div class="card h-100">
-            <div class="card-body">
-                <h3 class="w-100">Antes</h3>
-                @if (true)
-                <img src="https://images-cdn.9gag.com/photo/a9ALB5j_700b.jpg" class="img-fluid w-50" alt="Sorriso antes">
-                @else
-                <h6 class="mb-4 text-muted">Imagem não cadastrada</h6>
-                <img src="{{asset('images/no_image.png')}}" class="img-fluid w-50" alt="Sorriso antes">
-                @endif
-            </div>
+                <div class="card-body">
+                    <h3 class="w-100">Antes</h3>
+                    @if ($data["before"])
+                        <img src="https://images-cdn.9gag.com/photo/a9ALB5j_700b.jpg" class="img-fluid w-50" alt="Sorriso antes">
+                    @else
+                        <h6 class="mb-4 text-muted">Imagem não cadastrada</h6>
+                        <img src="{{ asset('images/no_image.png') }}" class="img-fluid w-50" alt="Sorriso antes">
+                    @endif
+                </div>
             </div>
         </div>
 
         <div class="col-12 col-md-6">
             <div class="card h-100">
-            <div class="card-body">
-                <h3 class="w-100">Depois</h3>
-                <h6 class="mb-4 text-muted">Imagem não cadastrada</h6>
-                <img src="{{asset('images/no_image.png')}}" class="img-fluid w-50" alt="Sorriso depois">
-            </div>
+                <div class="card-body">
+                    <h3 class="w-100">Depois</h3>
+                    @if ($data["after"])
+                        <img src="https://images-cdn.9gag.com/photo/a9ALB5j_700b.jpg" class="img-fluid w-50" alt="Sorriso depois">
+                    @else
+                        <h6 class="mb-4 text-muted">Imagem não cadastrada</h6>
+                        <img src="{{ asset('images/no_image.png') }}" class="img-fluid w-50" alt="Sorriso depois">
+                    @endif
+                </div>
             </div>
         </div>
 

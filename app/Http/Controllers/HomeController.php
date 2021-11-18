@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+        // $this->middleware("auth");
     }
 
     /**
@@ -23,11 +23,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view("home");
     }
 
     public function mySmiles()
     {
-        return view('patient.my_smiles');
+        $data = [
+            "before" => true,
+            "after"  => false
+        ];
+
+        return view("patient.my_smiles", compact(["data"]));
     }
 }
