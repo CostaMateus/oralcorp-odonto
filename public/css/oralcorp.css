@@ -134,3 +134,14 @@ button.bg-oc:focus {
 a.text-oc:hover, a.text-oc:focus {
     color: #0056b3 !important;
 }
+
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active,
+.sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+    background-color: #0a1a3b;
+    color: #FFF;
+}
+
+.table tr th,
+.table tr td {
+    vertical-align: middle !important;
+}

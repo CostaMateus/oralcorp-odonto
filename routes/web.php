@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,15 @@ Auth::routes();
 
 Route::middleware(["auth"])->group(function () {
 
-    Route::get('/',            [App\Http\Controllers\HomeController::class, 'index']);
-    Route::get('/home',        [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/tratamentos', [App\Http\Controllers\HomeController::class, 'treatments'])->name('treatments');
+    Route::get("/",              [HomeController::class, "index"]);
+    Route::get("/home",          [HomeController::class, "index"])     ->name("home");
+
+    Route::get("/tratamentos",   [HomeController::class, "treatments"])->name("patient.treatments");
+    Route::get("/contatos",      [HomeController::class, "contacts"])  ->name("patient.contacts");
+    Route::get("/agenda",        [HomeController::class, "schedule"])  ->name("patient.schedule");
+    Route::get("/meus-sorrisos", [HomeController::class, "mySmiles"])  ->name("patient.my_smiles");
+    Route::get("/financeiro",    [HomeController::class, "financial"]) ->name("patient.financial");
+    Route::get("/indique",       [HomeController::class, "indicate"])  ->name("patient.indicate");
+    Route::get("/checkin",       [HomeController::class, "checkin"])   ->name("patient.checkin");
 
 });
