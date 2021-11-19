@@ -55,9 +55,9 @@
 <script>
 
     // MODAL-TREATMENT
-        $(document).on("click", ".modal-treatment", function() {
-            let modal_title   = $(this).data("m-title");
-            let modal_body    = $(this).data("m-description");
+        $(document).on("click", ".treatment", function() {
+            let modal_title   = $(this).data("title");
+            let modal_body    = $(this).data("treatment_description");
             
             $("#m-title").val(modal_title);
             $("#m-description").val(modal_body);
