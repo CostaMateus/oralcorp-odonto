@@ -13,8 +13,8 @@
     <div class="row">
 
         @foreach ($treatments as $key => $t)
-            <div class="col-12 md-6 lg-3">
-                <a class="treatment" href="#"
+            <div class="col-12 col-md-6 col-lg-3">
+                <a class="treatment" role="button"
                     data-id="{{ $key }}"
                     data-title="{{ $t["title"]}}"
                     data-treatment_description="{{ $t["description"]}}">
@@ -22,7 +22,7 @@
                         <div class="inner text-center">
                             <img class="img-circle elevation-2 mb-2" src="{{ asset($t["image"]) }}" width="55" alt="Tratamento">
                             <h4 class="mb-0 text-gray-dark">{{ $t["title"] }}</h4>
-                            <span class="btn-link" >saiba mais</span>
+                            <span class="btn-link text-oc" >saiba mais</span>
                         </div>
                     </div>
                 </a>
@@ -32,7 +32,7 @@
     </div>
 
     <div id="modal-treatment" class="modal fade show" aria-modal="true" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 id="m-title" class="modal-title">{{ $t["title"] }}</h4>
@@ -42,7 +42,7 @@
                 </div>
                 <div id="m-description" class="modal-body">{{ $t["description"] }}</div>
                 <div class="modal-footer float-right">
-                    <button type="button" class="btn btn-primary btn-ocorp">Tenho interesse</button>
+                    <button type="button" class="btn btn-oc">Tenho interesse</button>
                 </div>
             </div>
         </div>
@@ -58,11 +58,11 @@
         $(document).on("click", ".treatment", function() {
             let modal_title   = $(this).data("title");
             let modal_body    = $(this).data("treatment_description");
-            
+
             $("#m-title").val(modal_title);
             $("#m-description").val(modal_body);
-            
-            $("#modal-treatment").modal("show");
 
+            $("#modal-treatment").modal("show");
+        });
 </script>
 @stop
