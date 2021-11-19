@@ -13,13 +13,16 @@
     <div class="row">
 
         @foreach ($treatments as $key => $t)
-            <div class="col-lg-3 col-12">
-                <a class="treatment" href="#" data-id="{{ $key }}">
+            <div class="col-12 col-md-6 col-lg-3">
+                <a class="treatment" role="button"
+                    data-id="{{ $key }}"
+                    data-title="{{ $t["title"]}}"
+                    data-description="{{ $t["description"]}}">
                     <div class="small-box bg-white">
                         <div class="inner text-center">
                             <img class="img-circle elevation-2 mb-2" src="{{ asset($t["image"]) }}" width="55" alt="Tratamento">
                             <h4 class="mb-0 text-gray-dark">{{ $t["title"] }}</h4>
-                            <span class="btn-link">saiba mais</span>
+                            <span class="btn-link text-oc" >saiba mais</span>
                         </div>
                     </div>
                 </a>
@@ -29,17 +32,17 @@
     </div>
 
     <div id="modal-treatment" class="modal fade show" aria-modal="true" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 id="m-title" class="modal-title">asdasd</h4>
+                    <h4 id="m-title" class="modal-title"></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div id="m-description" class="modal-body"></div>
                 <div class="modal-footer float-right">
-                    <button type="button" class="btn btn-primary btn-ocorp">Tenho interesse</button>
+                    <button type="button" class="btn btn-oc">Tenho interesse</button>
                 </div>
             </div>
         </div>
@@ -50,9 +53,15 @@
 
 @section('js')
 <script>
-    // const treatments = {!! json_encode($treatments) !!};
-    // $('#m-title').html(treatments[6]["title"]);
-    // $('#modal-treatment').show();
-    // console.log(treatments);
+    // MODAL-TREATMENT
+    $(document).on("click", ".treatment", function() {
+        const title       = $(this).data("title");
+        const description = $(this).data("description");
+        
+        $("#m-title").val(title);
+        $("#m-description").val(description);
+        
+        $("#modal-treatment").modal("show");
+    });
 </script>
 @stop
