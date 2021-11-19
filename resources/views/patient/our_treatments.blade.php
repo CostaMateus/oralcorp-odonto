@@ -12,12 +12,26 @@
 @section('content')
     <div class="row">
 
-        @foreach ($treatments as $key => $t)
+        {{-- @foreach ($treatments as $key => $t)
             <div class="col-12 col-md-6 col-lg-3">
                 <a class="treatment" role="button"
                     data-id="{{ $key }}"
                     data-title="{{ $t["title"]}}"
                     data-treatment_description="{{ $t["description"]}}">
+                    <div class="small-box bg-white">
+                        <div class="inner text-center">
+                            <img class="img-circle elevation-2 mb-2" src="{{ asset($t["image"]) }}" width="55" alt="Tratamento">
+                            <h4 class="mb-0 text-gray-dark">{{ $t["title"] }}</h4>
+                            <span class="btn-link text-oc" >saiba mais</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        @endforeach --}}
+
+        @foreach ($treatments as $key => $t)
+            <div class="col-12 col-md-6 col-lg-3">
+                <a class="treatment" role="button" data-id="{{ $key }}" >
                     <div class="small-box bg-white">
                         <div class="inner text-center">
                             <img class="img-circle elevation-2 mb-2" src="{{ asset($t["image"]) }}" width="55" alt="Tratamento">
@@ -53,16 +67,28 @@
 
 @section('js')
 <script>
+    // // MODAL-TREATMENT
+    // $(document).on("click", ".treatment", function() {
+    //     let modal_title   = $(this).data("title");
+    //     let modal_body    = $(this).data("treatment_description");
 
-    // MODAL-TREATMENT
-        $(document).on("click", ".treatment", function() {
-            let modal_title   = $(this).data("title");
-            let modal_body    = $(this).data("treatment_description");
+    //     $("#m-title").val(modal_title);
+    //     $("#m-description").val(modal_body);
 
-            $("#m-title").val(modal_title);
-            $("#m-description").val(modal_body);
+    //     $("#modal-treatment").modal("show");
+    // });
 
-            $("#modal-treatment").modal("show");
-        });
+
+    const treatments = {!! json_encode($treatments) !!};
+
+    $(document).on("click", ".treatment", function() {
+        let id = $(this).data("id");
+
+        $('#m-title').html(treatments[id]["title"]);
+        $('#m-description').html(treatments[id]["description"]);
+
+        $('#modal-treatment').modal("show");
+    });
+
 </script>
 @stop
