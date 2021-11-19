@@ -15,7 +15,13 @@ class Clinic extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'code'
+        "name",
+        "full_name",
+        "code",
+        "address",
+        "whatsapp",
+        "phone",
+        "instagram",
     ];
 
     /**

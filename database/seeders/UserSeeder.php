@@ -38,6 +38,26 @@ class UserSeeder extends Seeder
                 'remember_token'    => Str::random(10),
                 "created_at"        => $timestamp,
                 "updated_at"        => $timestamp
+            ],
+            [
+                "clinic_id"         => 2,
+                "name"              => "User Test",
+                "email"             => "test1@example.com",
+                'email_verified_at' => now(),
+                "password"          => Hash::make("password"),
+                'remember_token'    => Str::random(10),
+                "created_at"        => $timestamp,
+                "updated_at"        => $timestamp
+            ],
+            [
+                "clinic_id"         => 3,
+                "name"              => "User Test",
+                "email"             => "test2@example.com",
+                'email_verified_at' => now(),
+                "password"          => Hash::make("password"),
+                'remember_token'    => Str::random(10),
+                "created_at"        => $timestamp,
+                "updated_at"        => $timestamp
             ]
         ]);
     }
