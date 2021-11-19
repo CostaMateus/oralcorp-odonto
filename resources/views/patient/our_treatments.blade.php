@@ -46,13 +46,14 @@
 
 @section('js')
 <script>
-    //
-    const treatments = {!! json_encode($treatments) !!};
+
+    //const treatments = {!! json_encode($treatments) !!};
 
     // $('#m-title').html(treatments[6]["title"]);
 
     // $('#modal-treatment').show();
 
-    console.log(treatments);
+    //console.log(treatments);
+
 </script>
 @stop
