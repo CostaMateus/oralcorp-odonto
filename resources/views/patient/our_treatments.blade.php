@@ -16,13 +16,13 @@
             <div class="col-12 md-6 lg-3">
                 <a class="treatment" href="#"
                     data-id="{{ $key }}"
-                    data-description="{{ $t["description"]}}">
+                    data-title="{{ $t["title"]}}"
+                    data-treatment_description="{{ $t["description"]}}">
                     <div class="small-box bg-white">
                         <div class="inner text-center">
                             <img class="img-circle elevation-2 mb-2" src="{{ asset($t["image"]) }}" width="55" alt="Tratamento">
                             <h4 class="mb-0 text-gray-dark">{{ $t["title"] }}</h4>
-                            <span class="btn-link" >
-                                saiba mais</span>
+                            <span class="btn-link" >saiba mais</span>
                         </div>
                     </div>
                 </a>
@@ -35,12 +35,12 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 id="m-title" class="modal-title">asdasd</h4>
+                    <h4 id="m-title" class="modal-title">{{ $t["title"] }}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div id="m-description" class="modal-body"></div>
+                <div id="m-description" class="modal-body">{{ $t["description"] }}</div>
                 <div class="modal-footer float-right">
                     <button type="button" class="btn btn-primary btn-ocorp">Tenho interesse</button>
                 </div>
@@ -53,23 +53,16 @@
 
 @section('js')
 <script>
-    // const treatments = {!! json_encode($treatments) !!};
 
-    // $('#m-title').html(treatments[6]["title"]);
-
-    // $('#modal-treatment').show();
-
-    // console.log(treatments);
-
-    // Modal-Tratamentos
-        $(document).on("click", ".treatment", function() {
-            let treatment_id = $(this).data("pacient_id");
-            let name       = $(this).data("name");
-            $("#hf-pacient_id").val(data-id);
-            $("#hf-pacient_name").val(name);
-            clearInvald();
-            clearStatus();
-            $("#treatment").modal("show");
+    // MODAL-TREATMENT
+        $(document).on("click", ".modal-treatment", function() {
+            let modal_title   = $(this).data("m-title");
+            let modal_body    = $(this).data("m-description");
+            
+            $("#m-title").val(modal_title);
+            $("#m-description").val(modal_body);
+            
+            $("#modal-treatment").modal("show");
 
 </script>
 @stop
