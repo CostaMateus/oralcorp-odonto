@@ -75,17 +75,19 @@ class HomeController extends Controller
 
     public function contacts()
     {
-        $data = [
-            "name" => "Vila Lidia",
-            "number_phone" => "(19) 3305-5555",
-            "whatsapp_phone" => "(19) 97417-0441",
-            "facebook" => "@iocodontologia",
-            "instagram" => "@iocodontologia",
-            "site" => "Oral Corp",
-            "location" => "	Avenida Francisco Glicério 669, Campinas/SP"
-        ];
+        // $data = [
+        //     "name" => "Vila Lidia",
+        //     "number_phone" => "(19) 3305-5555",
+        //     "whatsapp_phone" => "(19) 97417-0441",
+        //     "facebook" => "@iocodontologia",
+        //     "instagram" => "@iocodontologia",
+        //     "site" => "Oral Corp",
+        //     "location" => "	Avenida Francisco Glicério 669, Campinas/SP"
+        // ];
 
-        return view("patient.contacts", compact(["data"]));
+        // return view("patient.contacts", compact(["data"]));
+
+        return view("patient.contacts");
     }
 
     public function schedule()
