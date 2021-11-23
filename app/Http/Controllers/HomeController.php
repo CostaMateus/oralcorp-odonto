@@ -92,7 +92,7 @@ class HomeController extends Controller
 
     public function schedule()
     {
-        return view("patient.home");
+        return view("patient.schedule");
     }
 
     /**
