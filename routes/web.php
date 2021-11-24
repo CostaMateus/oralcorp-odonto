@@ -29,4 +29,7 @@ Route::middleware(["auth"])->group(function () {
     Route::get("/indique",       [HomeController::class, "indicate"])  ->name("patient.indicate");
     Route::get("/checkin",       [HomeController::class, "checkin"])   ->name("patient.checkin");
 
+    Route::middleware(["role:developer"])->group(function () {});
+    Route::middleware(["role:manager"])->group(function () {});
+
 });
