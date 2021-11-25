@@ -66,12 +66,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name'      => $data['name'],
             'email'     => $data['email'],
             'clinic_id' => $data['clinic_id'],
             'password'  => Hash::make($data['password']),
         ]);
+
+        $user->roles()->attach(Role::where("slug", "patient")->first());
+
+        return $user;
     }
 
     public function showRegistrationForm()
