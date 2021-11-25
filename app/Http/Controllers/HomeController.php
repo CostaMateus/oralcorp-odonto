@@ -117,7 +117,7 @@ class HomeController extends Controller
 
     public function indicate()
     {
-        return view("patient.home");
+        return view("patient.indicate");
     }
 
     public function checkin()
