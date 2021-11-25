@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section("title_prefix", "Contatos")
+@section("title_prefix", "Indique")
 @section("title")
 @section("title_posfix")
 
