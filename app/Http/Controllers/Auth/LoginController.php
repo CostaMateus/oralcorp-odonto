@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\Clinic;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -43,5 +45,34 @@ class LoginController extends Controller
     {
         $clinics = Clinic::all();
         return view('adminlte::auth.login', compact(["clinics"]));
+    }
+
+    public function authenticated(Request $request)
+    {
+        Auth::logoutOtherDevices($request->email);
+    }
+
+    public function login(Request $request)
+    {
+        $message = [
+            'clinic_id.required' => 'O campo unidade é obrigatório.',
+        ];
+
+        $credentials = $request->validate([
+            'email'     => ['required', 'email'],
+            'password'  => ['required'],
+            'clinic_id' => ['required'],
+        ], $message);
+
+        if (Auth::attempt($credentials))
+        {
+            $request->session()->regenerate();
+
+            return redirect()->intended('');
+        }
+
+        return back()->withErrors([
+            'email' => 'Essas credenciais não foram encontradas em nossos registros.',
+        ]);
     }
 }
