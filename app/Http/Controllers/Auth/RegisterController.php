@@ -75,7 +75,7 @@ class RegisterController extends Controller
             'password'  => Hash::make($data['password']),
         ]);
 
-        $user->roles()->attach(Role::where("id", $data["role"])->get("slug")->first()->slug);
+        $user->roles()->attach(Role::where("id", $data["role"])->first());
 
         return $user;
     }
