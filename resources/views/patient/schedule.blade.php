@@ -11,30 +11,26 @@
 
 @section('content')
 
-    <div id="card-oc" class="row pt-3">
-        <div class="row">
-           @foreach ( $appointments as $key => $apt )
-                @if ( !empty($apt["date"]))
-                <div class="col-12 col-sm-6 col-md-4 col-xl-3 @if($key % 2 ==0)
-                bg-light @else bg-dark @endif">
-                    <div class="my-auto py-3">
-                        <div div class="mx-0 mx-sm-auto text-sm-center float-left float-sm-none">
-                            <h6>Data: {{$apt["date"]}}</h6>
-                            <h6>Horário: {{$apt["time"]}}</h6>
+    <div class="row">
+        @forelse ( $appointments as $key => $apt )
+            <div class="col-12 col-sm-4 col-md-3 col-xl-2">
+                <div class="card p-3">
+                    <div class="row">
+                        <div class="col-6 col-sm-12 text-sm-center">
+                            <h6                      ><b>Data</b>: {{ $apt["date"] }}</h6>
+                            <h6 class="mb-0 mb-sm-3" ><b>Horário</b>: {{ $apt["time"] }}</h6>
                         </div>
-                        <div class="mx-0 mx-sm-auto text-sm-center float-right float-sm-none">
-                            <button type="submit" class="btn btn-primary @if($key % 2 ==0)
-                            btn-oc @else btn-light @endif">Desmarcar</button>
+                        <div class="col-6 col-sm-12 my-auto my-sm-0 text-sm-center">
+                            <button type="submit" class="btn btn-oc float-right float-sm-none">Desmarcar</button>
                         </div>
                     </div>
                 </div>
-                @else
-                    <div class="col-w-100 col-md-8 py-4 px-5 mx-auto">
-                        <h4>Você ainda não possui horário marcado.</h4>
-                    </div>
-                @endif
-           @endforeach
-        </div>
+            </div>
+        @empty
+            <div class="col col-md-8 mx-auto p-3">
+                <h4>Você ainda não possui horário marcado.</h4>
+            </div>
+        @endforelse
     </div>
 
 @stop
