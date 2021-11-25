@@ -117,7 +117,13 @@ class HomeController extends Controller
 
     public function indicate()
     {
-        return view("patient.indicate");
+        $indicate = [
+            "ind_made" => "2",
+            "disc_received" => "50,00",
+            "disc_to_receive" => "35,50",
+        ];
+
+        return view("patient.indicate", compact(["indicate"]));
     }
 
     public function checkin()
