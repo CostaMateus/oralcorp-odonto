@@ -47,16 +47,21 @@ class UserSeeder extends Seeder
         {
             $user = User::create($u);
 
-            $role = ($key % 2 == 0)
-                ? Role::where("slug", "developer")->first()
-                : Role::where("slug", "manager")->first();
+            $user->roles()->attach(Role::where("slug", "admin")->first());
 
-            $perm = ($key % 2 == 0)
-                ? Permission::where("slug", "create-tasks")->first()
-                : Permission::where("slug", "edit-users")->first();
+            // // SET ROLE
+            // $role = ($key % 2 == 0)
+            //     ? Role::where("slug", "developer")->first()
+            //     : Role::where("slug", "manager")->first();
 
-            $user->roles()->attach($role);
-            $user->permissions()->attach($perm);
+            // $user->roles()->attach($role);
+
+            // // SET PERMISSION
+            // $perm = ($key % 2 == 0)
+            //     ? Permission::where("slug", "create-tasks")->first()
+            //     : Permission::where("slug", "edit-users")->first();
+
+            // $user->permissions()->attach($perm);
         }
     }
 }
