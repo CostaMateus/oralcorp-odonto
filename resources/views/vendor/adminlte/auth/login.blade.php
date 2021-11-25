@@ -34,13 +34,19 @@
 
         {{-- clinic field --}}
         <div class="form-group mb-3">
-            <label for="clinic" >Unidade</label>
-            <select id="clinic" name="clinic" class="form-control" >
+            <label for="clinic_id" >Unidade</label>
+            <select id="clinic_id" name="clinic_id" class="form-control {{ $errors->has('clinic_id') ? 'is-invalid' : '' }}" >
                 <option value="0" selected disabled >Selecione...</option>
                 @foreach ($clinics as $c)
-                    <option value="{{ $c->code }}" >{{ $c->name }}</option>
+                    <option value="{{ $c->id }}" >{{ $c->name }}</option>
                 @endforeach
             </select>
+
+            @if($errors->has('clinic_id'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('clinic_id') }}</strong>
+                </div>
+            @endif
         </div>
 
         {{-- Email field --}}
