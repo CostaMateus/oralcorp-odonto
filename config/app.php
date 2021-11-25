@@ -179,6 +179,7 @@ return [
          *Extras
          */
         Barryvdh\Debugbar\ServiceProvider::class,
+        App\Providers\PermissionsServiceProvider::class,
     ],
 
     /*

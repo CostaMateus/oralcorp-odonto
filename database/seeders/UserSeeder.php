@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use App\Models\User;
+use App\Models\Permission;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -16,9 +18,9 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $timestamp = date("Y-m-d");
+        // $timestamp = date("Y-m-d");
 
-        User::insert([
+        $data = [
             [
                 "clinic_id"         => 1,
                 "name"              => "Mateus Costa",
@@ -26,8 +28,8 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 "password"          => Hash::make("password"),
                 'remember_token'    => Str::random(10),
-                "created_at"        => $timestamp,
-                "updated_at"        => $timestamp
+                // "created_at"        => $timestamp,
+                // "updated_at"        => $timestamp
             ],
             [
                 "clinic_id"         => 1,
@@ -36,29 +38,25 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 "password"          => Hash::make("password"),
                 'remember_token'    => Str::random(10),
-                "created_at"        => $timestamp,
-                "updated_at"        => $timestamp
+                // "created_at"        => $timestamp,
+                // "updated_at"        => $timestamp
             ],
-            [
-                "clinic_id"         => 2,
-                "name"              => "User Test",
-                "email"             => "test1@example.com",
-                'email_verified_at' => now(),
-                "password"          => Hash::make("password"),
-                'remember_token'    => Str::random(10),
-                "created_at"        => $timestamp,
-                "updated_at"        => $timestamp
-            ],
-            [
-                "clinic_id"         => 3,
-                "name"              => "User Test",
-                "email"             => "test2@example.com",
-                'email_verified_at' => now(),
-                "password"          => Hash::make("password"),
-                'remember_token'    => Str::random(10),
-                "created_at"        => $timestamp,
-                "updated_at"        => $timestamp
-            ]
-        ]);
+        ];
+
+        foreach ($data as $key => $u)
+        {
+            $user = User::create($u);
+
+            $role = ($key % 2 == 0)
+                ? Role::where("slug", "developer")->first()
+                : Role::where("slug", "manager")->first();
+
+            $perm = ($key % 2 == 0)
+                ? Permission::where("slug", "create-tasks")->first()
+                : Permission::where("slug", "edit-users")->first();
+
+            $user->roles()->attach($role);
+            $user->permissions()->attach($perm);
+        }
     }
 }
