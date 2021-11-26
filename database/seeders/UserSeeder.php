@@ -23,8 +23,8 @@ class UserSeeder extends Seeder
         $data = [
             [
                 "clinic_id"         => 1,
-                "name"              => "Mateus Costa",
-                "email"             => "costa.mack95@gmail.com",
+                "name"              => "Filipe Paciente",
+                "email"             => "f.paciente@example.com",
                 'email_verified_at' => now(),
                 "password"          => Hash::make("password"),
                 'remember_token'    => Str::random(10),
@@ -33,8 +33,28 @@ class UserSeeder extends Seeder
             ],
             [
                 "clinic_id"         => 1,
-                "name"              => "Filipe Lucas",
-                "email"             => "filipeanfer@gmail.com",
+                "name"              => "Filipe Admin",
+                "email"             => "f.admin@example.com",
+                'email_verified_at' => now(),
+                "password"          => Hash::make("password"),
+                'remember_token'    => Str::random(10),
+                // "created_at"        => $timestamp,
+                // "updated_at"        => $timestamp
+            ],
+            [
+                "clinic_id"         => 1,
+                "name"              => "Mateus Paciente",
+                "email"             => "m.paciente@example.com",
+                'email_verified_at' => now(),
+                "password"          => Hash::make("password"),
+                'remember_token'    => Str::random(10),
+                // "created_at"        => $timestamp,
+                // "updated_at"        => $timestamp
+            ],
+            [
+                "clinic_id"         => 1,
+                "name"              => "Mateus Admin",
+                "email"             => "m.admin@example.com",
                 'email_verified_at' => now(),
                 "password"          => Hash::make("password"),
                 'remember_token'    => Str::random(10),
@@ -47,14 +67,14 @@ class UserSeeder extends Seeder
         {
             $user = User::create($u);
 
-            $user->roles()->attach(Role::where("slug", "admin")->first());
+            // $user->roles()->attach(Role::where("slug", "admin")->first());
 
-            // // SET ROLE
-            // $role = ($key % 2 == 0)
-            //     ? Role::where("slug", "developer")->first()
-            //     : Role::where("slug", "manager")->first();
+            // SET ROLE
+            $role = ($key % 2 == 0)
+                ? Role::where("slug", "patient")->first()
+                : Role::where("slug", "admin")->first();
 
-            // $user->roles()->attach($role);
+            $user->roles()->attach($role);
 
             // // SET PERMISSION
             // $perm = ($key % 2 == 0)
