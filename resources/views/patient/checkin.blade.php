@@ -39,7 +39,7 @@
                 <div class="form-group">
                     @foreach ( $checkins as $key => $c )
                         <div class="form-check" >
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1" checked="">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1">
                             <label class="form-check-label" for="exampleRadios1">
                                 {{ $c["title"] }}
                             </label>
@@ -62,14 +62,10 @@
 @section('js')
 <script>
     // MODAL-TREATMENT
-    $(document).on("click", ".checkin", function() {
-        const title       = $(this).data("title");
-        const description = $(this).data("description");
-
-        $("#m-title").val(title);
-        $("#m-description").val(description);
+    $(document).on("click", ".btn", function() {
 
         $("#modal-checkin").modal("show");
+
     });
 </script>
 @stop
