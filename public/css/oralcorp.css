@@ -10,7 +10,6 @@
 .table-oc tbody + tbody {
     border-color: #808899;
 }
-
 .table-hover .table-oc:hover {
     background-color: #acb2bd;
 }
@@ -133,6 +132,24 @@ button.bg-oc:focus {
 
 a.text-oc:hover, a.text-oc:focus {
     color: #0056b3 !important;
+}
+
+
+[class*=sidebar-light] .user-panel a {
+    color: #343A40 !important;
+}
+
+[class*=sidebar-light] .user-panel {
+    border-bottom: 1px solid #DEE2E6;
+}
+
+.fa-1x {
+    font-size: 1.3rem !important;
+}
+
+#card-oc h3 {
+    font-size: 1.9rem !important;
+    font-weight: 700 !important;
 }
 
 .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active,
