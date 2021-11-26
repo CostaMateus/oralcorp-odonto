@@ -6,7 +6,7 @@
 
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Indique um amigo</h1>
+    <h1 class="m-0 text-dark">Sorriso amigo</h1>
 @stop
 
 @section('content')
