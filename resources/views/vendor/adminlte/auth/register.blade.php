@@ -25,15 +25,24 @@
     <form action="{{ $register_url }}" method="post">
         @csrf
 
+        {{-- member role --}}
+        <input type="hidden" name="role" value="{{ $role }}" >
+
         {{-- clinic field --}}
         <div class="form-group mb-3">
-            <label for="clinic" >Unidade</label>
-            <select id="clinic" name="clinic" class="form-control" >
+            <label for="clinic_id" >Unidade</label>
+            <select id="clinic_id" name="clinic_id" class="form-control {{ $errors->has('clinic_id') ? 'is-invalid' : '' }}" >
                 <option value="0" selected disabled >Selecione...</option>
                 @foreach ($clinics as $c)
-                    <option value="{{ $c->code }}" >{{ $c->name }}</option>
+                    <option value="{{ $c->id }}" >{{ $c->name }}</option>
                 @endforeach
             </select>
+
+            @if($errors->has('clinic_id'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('clinic_id') }}</strong>
+                </div>
+            @endif
         </div>
 
         {{-- Name field --}}
@@ -101,6 +110,11 @@
 @section("footer")
     <footer class="py-3 text-center text-white" >
         <p class="h6 mb-0" >&copy; {{ date("Y") }} ORAL CORP ODONTO LTDA – 08.473.814.0001-55. Todos os direitos reservados. Proibida cópia ou reprodução sem autorização.</p>
-        <small class="mb-0" >Powered by <a class="text-light" href="https://www.linkedin.com/in/costamateus6/" target="_blank" rel="noopener noreferrer" >Mateus Costa</a></small>
+        <small class="mb-0" >
+            Powered by
+            <a class="text-light" href="https://www.linkedin.com/in/costamateus6/" target="_blank" rel="noopener noreferrer" >Costa</a>
+            &
+            <a class="text-light" href="https://www.linkedin.com/in/filipe-lucas/" target="_blank" rel="noopener noreferrer" >Ferreira</a>
+        </small>
     </footer>
 @endsection

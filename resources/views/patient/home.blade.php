@@ -18,18 +18,12 @@
     </div>
 @stop
 
-@section('content_header')
-    @role('developer')
-        <h1 class="m-0 text-dark">Developer</h1>
-    @elserole('manager')
-        <h1 class="m-0 text-dark">Manager</h1>
-    @endrole
-
-    {{-- <h1 class="m-0 text-dark">Início</h1> --}}
-@stop
+{{-- @section('content_header')
+    <h1 class="m-0 text-dark">Início</h1>
+@stop --}}
 
 @section('content')
-    <div id="card-oc" class="row ">{{-- pt-3 --}}
+    <div id="card-oc" class="row pt-3">
 
         <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-3">
             <a href="{{ route('patient.treatments') }}">

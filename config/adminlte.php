@@ -234,36 +234,51 @@ return [
             'text' => 'Nossos tratamentos',
             'url'  => '/tratamentos',
             'icon' => 'fas fa-fw fa-1x fa-tooth',
+            'role' => 'patient',
         ],
         [
             'text' => 'Nossos contatos',
             'url'  => '/contatos',
             'icon' => 'fas fa-fw fa-1x fa-phone-alt',
+            'role' => 'patient',
         ],
         [
             'text' => 'Agenda',
             'url'  => '/agenda',
             'icon' => 'fas fa-fw fa-1x fa-calendar-day',
+            'role' => 'patient',
         ],
         [
             'text' => 'Meus sorrisos',
             'url'  => '/meus-sorrisos',
             'icon' => 'fas fa-fw fa-1x fa-laugh',
+            'role' => 'patient',
         ],
         [
             'text' => 'Financeiro',
             'url'  => '/financeiro',
             'icon' => 'fas fa-fw fa-1x fa-dollar-sign',
+            'role' => 'patient',
         ],
         [
             'text' => 'Indique um amigo',
             'url'  => '/indique',
             'icon' => 'fas fa-fw fa-1x fa-comment-dots',
+            'role' => 'patient',
         ],
         [
             'text' => 'Check-in',
             'url'  => '/checkin',
             'icon' => 'fas fa-fw fa-1x fa-map-marker-alt',
+            'role' => 'patient',
+        ],
+
+        // admin
+        [
+            'text' => 'Usuários',
+            'url'  => '/usuarios',
+            'icon' => 'fas fa-fw fa-1x fa-user-alt',
+            'role' => 'admin',
         ],
     ],
 

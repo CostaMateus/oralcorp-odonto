@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Clinic;
 use App\Http\Controllers\Controller;
@@ -51,9 +52,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'clinic_id' => ['required', 'string'],
+            'role'      => ['required', 'string', 'min:2'],
+            'name'      => ['required', 'string', 'max:255'],
+            'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'  => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
@@ -65,16 +68,31 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $user = User::create([
+            'name'      => $data['name'],
+            'email'     => $data['email'],
+            'clinic_id' => $data['clinic_id'],
+            'password'  => Hash::make($data['password']),
         ]);
+
+        $user->roles()->attach(Role::where("id", $data["role"])->first());
+
+        return $user;
     }
 
     public function showRegistrationForm()
     {
         $clinics = Clinic::all();
-        return view('adminlte::auth.register', compact(["clinics"]));
+        $role    = Role::where("slug", "patient")->first()->id;
+
+        return view('adminlte::auth.register', compact(["clinics", "role"]));
+    }
+
+    public function showMemberRegistrationForm()
+    {
+        $clinics = Clinic::all();
+        $role    = Role::where("slug", "member")->first()->id;
+
+        return view('adminlte::auth.member-register', compact(["clinics", "role"]));
     }
 }

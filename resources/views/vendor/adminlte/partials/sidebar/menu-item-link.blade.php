@@ -1,23 +1,28 @@
-<li @isset($item['id']) id="{{ $item['id'] }}" @endisset class="nav-item">
 
-    <a class="nav-link py-3 {{ $item['class'] }} @isset($item['shift']) {{ $item['shift'] }} @endisset"
-        href="{{ $item['href'] }}" @isset($item['target']) target="{{ $item['target'] }}" @endisset
-        {!! $item['data-compiled'] ?? '' !!}>
+@if (isset($item['role']) && $item['role'] == auth()->user()->roles()->first()->slug)
 
-        <i class="{{ $item['icon'] ?? 'far fa-fw fa-circle' }} {{
-            isset($item['icon_color']) ? 'text-'.$item['icon_color'] : ''
-        }}"></i>
+    <li @isset($item['id']) id="{{ $item['id'] }}" @endisset class="nav-item">
 
-        <p>
-            {{ $item['text'] }}
+        <a class="nav-link py-3 {{ $item['class'] }} @isset($item['shift']) {{ $item['shift'] }} @endisset"
+            href="{{ $item['href'] }}" @isset($item['target']) target="{{ $item['target'] }}" @endisset
+            {!! $item['data-compiled'] ?? '' !!}>
 
-            @isset($item['label'])
-                <span class="badge badge-{{ $item['label_color'] ?? 'primary' }} right">
-                    {{ $item['label'] }}
-                </span>
-            @endisset
-        </p>
+            <i class="{{ $item['icon'] ?? 'far fa-fw fa-circle' }} {{
+                isset($item['icon_color']) ? 'text-'.$item['icon_color'] : ''
+            }}"></i>
 
-    </a>
+            <p>
+                {{ $item['text'] }}
 
-</li>
+                @isset($item['label'])
+                    <span class="badge badge-{{ $item['label_color'] ?? 'primary' }} right">
+                        {{ $item['label'] }}
+                    </span>
+                @endisset
+            </p>
+
+        </a>
+
+    </li>
+
+@endif
