@@ -20,7 +20,7 @@ class ClinicSeeder extends Seeder
             [
                 "name"        => "Campinas (centro)",
                 "full_name"   => "Unidade 1 - Campinas (centro)",
-                "code"        => "camp-1",
+                "code"        => "ioc",
                 "address"     => "Av. Francisco Glicério, 669 – Vila Lidia, Campinas - SP 13012-100",
                 "whatsapp"    => "(19) 97417-0441",
                 "phone"       => "(19) 3305-5555",
@@ -31,7 +31,7 @@ class ClinicSeeder extends Seeder
             [
                 "name"        => "Campinas",
                 "full_name"   => "Unidade 2 - Campinas",
-                "code"        => "camp-2",
+                "code"        => "aodonto2",
                 "address"     => "Rua Barão de Jaguara, 352, Campinas - SP 13026-063",
                 "whatsapp"    => "(19) 97417-0441",
                 "phone"       => "(19) 3324-3733",
@@ -42,7 +42,7 @@ class ClinicSeeder extends Seeder
             [
                 "name"        => "Valinhos",
                 "full_name"   => "Unidade 3 - Valinhos",
-                "code"        => "vali",
+                "code"        => "amodonto",
                 "address"     => "Av. Independência, 705, Valinhos - SP 13276-030",
                 "whatsapp"    => "(19) 97417-0441",
                 "phone"       => "(19) 3869-8110",

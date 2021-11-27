@@ -23,6 +23,7 @@
 @stop --}}
 
 @section('content')
+
     <div id="card-oc" class="row pt-3">
 
         <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-3">
@@ -103,6 +104,7 @@
             </a>
         </div>
     </div>
+
 @stop
 
 @include('patient.footer')

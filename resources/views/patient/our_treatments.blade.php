@@ -10,6 +10,7 @@
 @stop
 
 @section('content')
+
     <div class="row">
 
         @foreach ($treatments as $key => $t)
@@ -47,6 +48,7 @@
             </div>
         </div>
     </div>
+
 @stop
 
 @include('patient.footer')
@@ -58,8 +60,8 @@
         const title       = $(this).data("title");
         const description = $(this).data("description");
 
-        $("#m-title").val(title);
-        $("#m-description").val(description);
+        $("#m-title").html(title);
+        $("#m-description").html(description);
 
         $("#modal-treatment").modal("show");
     });
