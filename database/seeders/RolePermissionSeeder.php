@@ -15,6 +15,7 @@ class RolePermissionSeeder extends Seeder
      */
     public function run()
     {
+        // Não alterar a ordem
 		$data = [
             [
                 "name" => "Administrador",
@@ -34,7 +35,7 @@ class RolePermissionSeeder extends Seeder
             ],
 		];
 
-        foreach ($data as $r) $user = Role::create($r);
+        foreach ($data as $r) Role::create($r);
 
         // // SET ROLES
         // $dev_role           = new Role();
