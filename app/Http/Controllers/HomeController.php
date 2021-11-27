@@ -80,9 +80,38 @@ class HomeController extends Controller
         return view("patient.contacts");
     }
 
+    /**
+     * Função para retornar as consultas agendadas
+     *
+     * @return void
+     */
     public function schedule()
     {
-        return view("patient.home");
+        $appointments = [[
+                "date" => "24/11/2021",
+                "time" => "15:45",
+            ],[
+                "date" => "27/12/2021",
+                "time" => "15:15",
+            ],[
+                "date" => "27/12/2021",
+                "time" => "15:15",
+            ],[
+                "date" => "27/12/2021",
+                "time" => "15:15",
+            ],[
+                "date" => "27/12/2021",
+                "time" => "15:15",
+            ],[
+                "date" => "27/12/2021",
+                "time" => "15:15",
+            ],[
+                "date" => "27/12/2021",
+                "time" => "15:15",
+            ],
+        ];
+
+        return view("patient.schedule", compact(["appointments"]));
     }
 
     /**
