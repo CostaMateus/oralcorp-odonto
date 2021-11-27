@@ -35,24 +35,22 @@
             </div>
             <div class="modal-body">
               <p>Selecione a Modalidade do seu Check-in</p>
-              <form action="" method="post">
-                <div class="form-group">
-                    @foreach ( $checkins as $key => $c )
+              <form action="a definir" method="post">
+                  @foreach ( $checkins as $key => $c )
+                    <div class="form-group my-3">
                         <div class="form-check" >
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1">
-                            <label class="form-check-label" for="exampleRadios1">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="{{ $key }}" value="1">
+                            <label class="form-check-label" for="{{ $key }}">
                                 {{ $c["title"] }}
                             </label>
                         </div>
-                    @endforeach
-                </div>
+                    </div>
+                   @endforeach
                 <button type="submit" class="btn btn-primary btn-oc">OK!</button>
               </form>
             </div>
           </div>
-          <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
       </div>
 
 @stop

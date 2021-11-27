@@ -57,10 +57,10 @@
     $(document).on("click", ".treatment", function() {
         const title       = $(this).data("title");
         const description = $(this).data("description");
-        
+
         $("#m-title").val(title);
         $("#m-description").val(description);
-        
+
         $("#modal-treatment").modal("show");
     });
 </script>
