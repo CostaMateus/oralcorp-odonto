@@ -10,7 +10,6 @@
 @stop
 
 @section('content')
-<div class="container-fluid pb-3">
 
     <div class="card h-100 w-100 mb-0">
         <div class="row">
@@ -72,7 +71,6 @@
         </div>
     </div>
 
-</div>
 @stop
 
 @include('patient.footer')

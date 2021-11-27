@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,8 @@ use App\Http\Controllers\HomeController;
 
 Auth::routes();
 
+Route::get("/cadastro-membro", [RegisterController::class, "showMemberRegistrationForm"])->name("member.register");
+
 Route::middleware(["auth"])->group(function () {
 
     Route::get("/",              [HomeController::class, "index"]);
@@ -29,7 +32,10 @@ Route::middleware(["auth"])->group(function () {
     Route::get("/indique",       [HomeController::class, "indicate"])  ->name("patient.indicate");
     Route::get("/checkin",       [HomeController::class, "checkin"])   ->name("patient.checkin");
 
-    Route::middleware(["role:developer"])->group(function () {});
-    Route::middleware(["role:manager"])->group(function () {});
+    Route::middleware(["role:admin"])->group(function () {
+
+        Route::get("/usuarios", [UserController::class, "checkin"])   ->name("patient.checkin");
+
+    });
 
 });

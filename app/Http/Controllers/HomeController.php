@@ -24,7 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view("patient.home");
+        $folder_view = auth()->user()->roles()->get()->first()->slug;
+
+        return view("$folder_view.home");
     }
 
     /**
@@ -75,24 +77,41 @@ class HomeController extends Controller
 
     public function contacts()
     {
-        // $data = [
-        //     "name" => "Vila Lidia",
-        //     "number_phone" => "(19) 3305-5555",
-        //     "whatsapp_phone" => "(19) 97417-0441",
-        //     "facebook" => "@iocodontologia",
-        //     "instagram" => "@iocodontologia",
-        //     "site" => "Oral Corp",
-        //     "location" => "	Avenida Francisco Glicério 669, Campinas/SP"
-        // ];
-
-        // return view("patient.contacts", compact(["data"]));
-
         return view("patient.contacts");
     }
 
+    /**
+     * Função para retornar as consultas agendadas
+     *
+     * @return void
+     */
     public function schedule()
     {
-        return view("patient.home");
+        $appointments = [[
+                "date" => "24/11/2021",
+                "time" => "15:45",
+            ],[
+                "date" => "27/12/2021",
+                "time" => "15:15",
+            ],[
+                "date" => "27/12/2021",
+                "time" => "15:15",
+            ],[
+                "date" => "27/12/2021",
+                "time" => "15:15",
+            ],[
+                "date" => "27/12/2021",
+                "time" => "15:15",
+            ],[
+                "date" => "27/12/2021",
+                "time" => "15:15",
+            ],[
+                "date" => "27/12/2021",
+                "time" => "15:15",
+            ],
+        ];
+
+        return view("patient.schedule", compact(["appointments"]));
     }
 
     /**
@@ -117,12 +136,36 @@ class HomeController extends Controller
 
     public function indicate()
     {
-        return view("patient.home");
+        $indicate = [
+            "ind_made" => "2",
+            "disc_received" => "50,00",
+            "disc_to_receive" => "35,50",
+        ];
+
+        return view("patient.indicate", compact(["indicate"]));
     }
 
     public function checkin()
     {
-        return view("patient.home");
+        $checkins = [
+            [
+                "title" => "Consulta aparelho"
+            ],[
+                "title" => "Consulta clínica geral"
+            ],[
+                "title" => "Primeira vez"
+            ],[
+                "title" => "Preferencial"
+            ],[
+                "title" => "Radiologia"
+            ],[
+                "title" => "Remarcação"
+            ],[
+                "title" => "Financeiro"
+            ],
+        ];
+
+        return view("patient.checkin", compact(["checkins"]));
     }
 
 }
