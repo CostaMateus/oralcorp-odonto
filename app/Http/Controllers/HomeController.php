@@ -147,7 +147,25 @@ class HomeController extends Controller
 
     public function checkin()
     {
-        return view("patient.home");
+        $checkins = [
+            [
+                "title" => "Consulta aparelho"
+            ],[
+                "title" => "Consulta clínica geral"
+            ],[
+                "title" => "Primeira vez"
+            ],[
+                "title" => "Preferencial"
+            ],[
+                "title" => "Radiologia"
+            ],[
+                "title" => "Remarcação"
+            ],[
+                "title" => "Financeiro"
+            ],
+        ];
+
+        return view("patient.checkin", compact(["checkins"]));
     }
 
 }
