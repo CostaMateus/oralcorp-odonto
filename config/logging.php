@@ -113,6 +113,13 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        // custom log
+        'oralcorp' => [
+            'driver' => 'single',
+            'path'   => storage_path('logs/oralcorp.log'),
+            'level'  => env('LOG_LEVEL', 'debug'),
+        ],
     ],
 
 ];
