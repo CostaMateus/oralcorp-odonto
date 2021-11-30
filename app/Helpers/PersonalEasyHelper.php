@@ -134,6 +134,14 @@ class PersonalEasyHelper
                 ];
                 self::arrayReplaceKeys($data, $newKeys);
             break;
+
+            case "financial":
+                $newKeys = [
+                    "data"  => "date",
+                    "valor" => "value"
+                ];
+                self::arrayReplaceKeys($data, $newKeys);
+            break;
         }
 
     }

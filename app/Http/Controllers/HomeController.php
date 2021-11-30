@@ -126,7 +126,14 @@ class HomeController extends Controller
 
     public function financial()
     {
-        return view("patient.home");
+
+        $response = $this->service->getFinancial(Auth::user()->email);
+
+        $financial = $response["data"];
+
+        return view("patient.financial", compact([
+            "financial"
+        ]));
     }
 
     public function indicate()
