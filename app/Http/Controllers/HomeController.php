@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\PersonalEasyService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    private $service = "";
+
     /**
      * Create a new controller instance.
      *
@@ -14,6 +18,7 @@ class HomeController extends Controller
     public function __construct()
     {
         // $this->middleware("auth");
+        $this->service = new PersonalEasyService;
     }
 
     /**
@@ -120,12 +125,20 @@ class HomeController extends Controller
      */
     public function mySmiles()
     {
-        $data = [
-            "before" => true,
-            "after"  => false
+        $response =[
+            [
+                $start = $this->service->getStartImage(Auth::user()->external_id)
+            ],[
+                $end = $this->service->getEndImage(Auth::user()->external_id)
+            ],
         ];
 
-        return view("patient.my_smiles", compact(["data"]));
+        $smile = $response;
+        //dd($smile[1][0]["data"]);
+
+        return view("patient.my_smiles", compact([
+            "smile"
+        ]));
     }
 
     public function financial()
