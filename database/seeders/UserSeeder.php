@@ -23,7 +23,8 @@ class UserSeeder extends Seeder
         $data = [
             [
                 "clinic_id"         => 1,
-                "name"              => "Filipe Paciente",
+                "name"              => "F.Paciente",
+                "full_name"         => "Filipe Paciente",
                 "email"             => "f.paciente@example.com",
                 'email_verified_at' => now(),
                 "password"          => Hash::make("password"),
@@ -33,7 +34,8 @@ class UserSeeder extends Seeder
             ],
             [
                 "clinic_id"         => 1,
-                "name"              => "Filipe Admin",
+                "name"              => "F.Admin",
+                "full_name"         => "Filipe Admin",
                 "email"             => "f.admin@example.com",
                 'email_verified_at' => now(),
                 "password"          => Hash::make("password"),
@@ -43,7 +45,8 @@ class UserSeeder extends Seeder
             ],
             [
                 "clinic_id"         => 1,
-                "name"              => "Mateus Paciente",
+                "name"              => "M.Paciente",
+                "full_name"         => "Mateus Paciente",
                 "email"             => "m.paciente@example.com",
                 'email_verified_at' => now(),
                 "password"          => Hash::make("password"),
@@ -53,7 +56,8 @@ class UserSeeder extends Seeder
             ],
             [
                 "clinic_id"         => 1,
-                "name"              => "Mateus Admin",
+                "name"              => "M.Admin",
+                "full_name"         => "Mateus Admin",
                 "email"             => "m.admin@example.com",
                 'email_verified_at' => now(),
                 "password"          => Hash::make("password"),

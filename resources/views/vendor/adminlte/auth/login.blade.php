@@ -29,6 +29,12 @@
         <img src="{{ asset("images/logo/logo_b.png") }}" alt="Oral Corp" class="w-100">
     </div>
 
+    @error("status")
+        <div class="alert alert-danger">
+            {{ $message }}
+        </div>
+    @enderror
+
     <form id="login-form" action="{{ $login_url }}" method="post">
         {{ csrf_field() }}
 

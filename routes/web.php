@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PersonalEasyController;
 use App\Http\Controllers\Auth\RegisterController;
 
 /*
@@ -16,6 +17,8 @@ use App\Http\Controllers\Auth\RegisterController;
 */
 
 Auth::routes();
+
+Route::post("/login", [PersonalEasyController::class, "login"]);
 
 Route::get("/cadastro-membro", [RegisterController::class, "showMemberRegistrationForm"])->name("member.register");
 
@@ -34,7 +37,7 @@ Route::middleware(["auth"])->group(function () {
 
     Route::middleware(["role:admin"])->group(function () {
 
-        Route::get("/usuarios", [UserController::class, "checkin"])   ->name("patient.checkin");
+        // Route::get("/usuarios", [UserController::class, "checkin"])   ->name("patient.checkin");
 
     });
 
