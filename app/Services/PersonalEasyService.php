@@ -14,10 +14,11 @@ class PersonalEasyService
      * Consulta API segundo o metodo e os parametros passados
      *
      * @param string $method
-     * @param array $params
-     * @return json
+     * @param array|null $params
+     * @param string|null $code
+     * @return array
      */
-    private function makeRequest($method, $params = null, $code = null)
+    private function makeRequest(string $method, array $params = null, string $code = null)
     {
         $code   = $code ?? auth()->user()->clinic->code;
 
@@ -105,12 +106,13 @@ class PersonalEasyService
     }
 
     /**
-     * Consulta usuário
+     * Consulta paciente
      *
-     * @param int $id
+     * @param string $email
+     * @param string $code
      * @return array
      */
-    public function getUser($email, $code)
+    public function getUser(string $email, string $code)
     {
         $data = [
             "email" => $email,
@@ -121,6 +123,48 @@ class PersonalEasyService
         if ($response["code"] != 200) return $response;
 
         PersonalEasyHelper::dataConverter("users", $response["data"]);
+
+        return $response;
+    }
+
+    /**
+     * Recupera a imagem do inicio do tratamento
+     *
+     * @param string|null $patient_id
+     * @return array
+     */
+    public function getStartImage(string $patient_id = null)
+    {
+        $data = [
+            "nropac" => $patient_id ?? auth()->user()->external_id,
+        ];
+
+        $code = auth()->user() ? auth()->user()->clinic->code : "aodonto2";
+
+        $response = $this->makeRequest("RPCGetPacienteImagemIni", $data, $code);
+
+        if ($response["data"]) PersonalEasyHelper::dataConverter("images", $response["data"]);
+
+        return $response;
+    }
+
+    /**
+     * Recupera a imagem do final do tratamento
+     *
+     * @param string|null $patient_id
+     * @return array
+     */
+    public function getEndImage(string $patient_id = null)
+    {
+        $data = [
+            "nropac" => $patient_id ?? auth()->user()->external_id,
+        ];
+
+        $code = auth()->user() ? auth()->user()->clinic->code : "aodonto2";
+
+        $response = $this->makeRequest("RPCGetPacienteImagemFin", $data, $code);
+
+        if ($response["data"]) PersonalEasyHelper::dataConverter("images", $response["data"]);
 
         return $response;
     }

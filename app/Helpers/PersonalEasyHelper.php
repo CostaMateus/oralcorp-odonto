@@ -16,7 +16,7 @@ class PersonalEasyHelper
         if (empty($data)) return;
 
         // $common = [
-        //     "NROPAC"  => "pacient_id",
+        //     "NROPAC"  => "patient_id",
         //     "PRINOM"  => "name",
         //     "CELULAR" => "phone",
         // ];
@@ -118,7 +118,13 @@ class PersonalEasyHelper
                     "telefone" =>  "phone",
                     "ssenha"   =>  "password"
                 ];
-                $data=[];
+                self::arrayReplaceKeys($data, $newKeys);
+            break;
+
+            case "images":
+                $newKeys = [
+                    // "nropac"   =>  "external_id",
+                ];
                 self::arrayReplaceKeys($data, $newKeys);
             break;
         }
@@ -197,7 +203,7 @@ class PersonalEasyHelper
     private static function usort(&$data)
     {
         usort($data, function($a, $b) {
-            return $a["pacient_id"] <= $b["pacient_id"];
+            return $a["patient_id"] <= $b["patient_id"];
         });
     }
 }
