@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\PersonalEasyService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    private $service = "";
+
     /**
      * Create a new controller instance.
      *
@@ -14,6 +18,7 @@ class HomeController extends Controller
     public function __construct()
     {
         // $this->middleware("auth");
+        $this->service = new PersonalEasyService;
     }
 
     /**
@@ -80,65 +85,63 @@ class HomeController extends Controller
     }
 
     /**
-     * Função para retornar as consultas agendadas
+     * Retorna as consultas agendadas
      *
      * @return void
      */
     public function schedule()
     {
-        $appointments = [[
-                "date" => "24/11/2021",
-                "time" => "15:45",
-            ],[
-                "date" => "27/12/2021",
-                "time" => "15:15",
-            ],[
-                "date" => "27/12/2021",
-                "time" => "15:15",
-            ],[
-                "date" => "27/12/2021",
-                "time" => "15:15",
-            ],[
-                "date" => "27/12/2021",
-                "time" => "15:15",
-            ],[
-                "date" => "27/12/2021",
-                "time" => "15:15",
-            ],[
-                "date" => "27/12/2021",
-                "time" => "15:15",
-            ],
-        ];
 
-        return view("patient.schedule", compact(["appointments"]));
+        $response = $this->service->getSchedule(Auth::user()->email);
+
+        $appointments = $response["data"];
+
+        return view("patient.schedule", compact([
+            "appointments"
+        ]));
     }
 
     /**
-     * Undocumented function
+     * Retorna as fotos do antes e depois
      *
      * @return void
      */
     public function mySmiles()
     {
-        $data = [
-            "before" => true,
-            "after"  => false
+        $response =[
+            [
+                $start = $this->service->getStartImage(Auth::user()->external_id)
+            ],[
+                $end = $this->service->getEndImage(Auth::user()->external_id)
+            ],
         ];
 
-        return view("patient.my_smiles", compact(["data"]));
+        $smile = $response;
+        //dd($smile[1][0]["data"]);
+
+        return view("patient.my_smiles", compact([
+            "smile"
+        ]));
     }
 
     public function financial()
     {
-        return view("patient.home");
+
+        $response = $this->service->getFinancial(Auth::user()->email);
+
+        $financial = $response["data"];
+
+        return view("patient.financial", compact([
+            "financial"
+        ]));
     }
 
     public function indicate()
     {
         $indicate = [
-            "ind_made" => "2",
-            "disc_received" => "50,00",
-            "disc_to_receive" => "35,50",
+            "indications_made" => "2",
+            "discount_received" => "50,00",
+            "discount_to_receive" => "35,50",
         ];
 
         return view("patient.indicate", compact(["indicate"]));

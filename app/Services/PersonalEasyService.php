@@ -168,4 +168,47 @@ class PersonalEasyService
 
         return $response;
     }
+
+    /**
+     * Consulta Agenda do Paciente
+     *
+     * @param string $email
+     * @param string $code
+     * @return array
+     */
+    public function getSchedule(string $email)
+    {
+        $data = [
+            "email" => $email,
+        ];
+
+        $code = auth()->user()->clinic->code;
+
+        $response = $this->makeRequest("RPCGetPacienteAgenda", $data, $code);
+
+        PersonalEasyHelper::dataConverter("schedule", $response["data"]);
+
+        return $response;
+    }
+     /**
+     * Consulta Financeiro do Paciente
+     *
+     * @param string $email
+     * @param string $code
+     * @return array
+     */
+    public function getFinancial(string $email)
+    {
+        $data = [
+            "email" => $email,
+        ];
+
+        $code = auth()->user()->clinic->code;
+
+        $response = $this->makeRequest("RPCGetPacienteMensalidade", $data, $code);
+
+        PersonalEasyHelper::dataConverter("financial", $response["data"]);
+
+        return $response;
+    }
 }

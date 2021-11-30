@@ -127,6 +127,21 @@ class PersonalEasyHelper
                 ];
                 self::arrayReplaceKeys($data, $newKeys);
             break;
+
+            case "schedule":
+                $newKeys = [
+                    "horario"  => "schedule",
+                ];
+                self::arrayReplaceKeys($data, $newKeys);
+            break;
+
+            case "financial":
+                $newKeys = [
+                    "data"  => "date",
+                    "valor" => "value"
+                ];
+                self::arrayReplaceKeys($data, $newKeys);
+            break;
         }
 
     }
@@ -148,7 +163,15 @@ class PersonalEasyHelper
                 {
                     $arr[$new] = null;
                 }
-
+                // Separar a data e a hora
+                if ($new == "schedule")
+                {
+                    if (strlen($arr[$new]) == 1){
+                        self::toBoolean($arr, $new, $arr[$new]);
+                    }else{
+                        self::convertDate($arr, $new, $arr[$new]);
+                    }
+                }
                 // // only cases: 1/2/3/4/5
                 // if (in_array($new, ["above", "overdue", "opened"]))
                 // {
@@ -197,7 +220,7 @@ class PersonalEasyHelper
      */
     private static function convertDate(&$arr, $key, $value)
     {
-        $arr[$key] = !empty($value) ? implode("/", array_reverse(explode("-", explode("T", $value)[0]))) : "";
+        $arr[$key] = !empty($value) ? explode(" ", $value) : "";
     }
 
     private static function usort(&$data)
