@@ -149,7 +149,7 @@ class HomeController extends Controller
     public function indicate()
     {
         $indicate = [
-            "indication_made" => "2",
+            "indications_made" => "2",
             "discount_received" => "50,00",
             "discount_to_receive" => "35,50",
         ];
