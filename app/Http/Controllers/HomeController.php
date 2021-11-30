@@ -85,41 +85,24 @@ class HomeController extends Controller
     }
 
     /**
-     * Função para retornar as consultas agendadas
+     * Retorna as consultas agendadas
      *
      * @return void
      */
     public function schedule()
     {
-        $appointments = [[
-                "date" => "24/11/2021",
-                "time" => "15:45",
-            ],[
-                "date" => "27/12/2021",
-                "time" => "15:15",
-            ],[
-                "date" => "27/12/2021",
-                "time" => "15:15",
-            ],[
-                "date" => "27/12/2021",
-                "time" => "15:15",
-            ],[
-                "date" => "27/12/2021",
-                "time" => "15:15",
-            ],[
-                "date" => "27/12/2021",
-                "time" => "15:15",
-            ],[
-                "date" => "27/12/2021",
-                "time" => "15:15",
-            ],
-        ];
 
-        return view("patient.schedule", compact(["appointments"]));
+        $response = $this->service->getSchedule(Auth::user()->email);
+
+        $appointments = $response["data"];
+
+        return view("patient.schedule", compact([
+            "appointments"
+        ]));
     }
 
     /**
-     * Undocumented function
+     * Retorna as fotos do antes e depois
      *
      * @return void
      */
