@@ -49,6 +49,7 @@ class PersonalEasyController extends Controller
             }
             else
             {
+                $user->clinic_id   = $clinic->id;
                 $user->external_id = $login["external_id"];
                 $user->name        = explode(" ", $login["name"])[0];
                 $user->full_name   = $login["name"];
