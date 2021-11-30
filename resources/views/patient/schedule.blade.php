@@ -12,13 +12,13 @@
 @section('content')
 
     <div class="row">
-        @forelse ( $appointments as $key => $apt )
+        @forelse ( $appointments as $apt )
             <div class="col-12 col-sm-4 col-md-3 col-xl-2">
                 <div class="card p-3">
                     <div class="row">
                         <div class="col-6 col-sm-12 text-sm-center">
-                            <h6                      ><b>Data</b>: {{ $apt["date"] }}</h6>
-                            <h6 class="mb-0 mb-sm-3" ><b>Horário</b>: {{ $apt["time"] }}</h6>
+                            <h6                      ><b>Data   </b>: {{ $apt["schedule"][0] }}</h6>
+                            <h6 class="mb-0 mb-sm-3" ><b>Horário</b>: {{ $apt["schedule"][1] }}</h6>
                         </div>
                         <div class="col-6 col-sm-12 my-auto my-sm-0 text-sm-center">
                             <button type="submit" class="btn btn-oc float-right float-sm-none">Desmarcar</button>
