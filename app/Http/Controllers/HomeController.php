@@ -149,9 +149,9 @@ class HomeController extends Controller
     public function indicate()
     {
         $indicate = [
-            "ind_made" => "2",
-            "disc_received" => "50,00",
-            "disc_to_receive" => "35,50",
+            "indication_made" => "2",
+            "discount_received" => "50,00",
+            "discount_to_receive" => "35,50",
         ];
 
         return view("patient.indicate", compact(["indicate"]));
