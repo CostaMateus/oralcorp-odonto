@@ -16,9 +16,9 @@
         <div class="card h-100 w-100 mb-0">
             <div class="row">
                 <div class="col-12 col-lg-6 py-3 pl-4 pr-3">
-                    <h5><span class="text-bold">Indicações realizadas:</span>   {{ $indicate["indications_made"]         }}</h5>
-                    <h5><span class="text-bold">Descontos concebidos:</span> R$ {{ $indicate["discounts_received"]       }}</h5>
-                    <h5><span class="text-bold">Descontos a receber:</span> R$  {{ $indicate["discounts_to_be_received"] }}</h5>
+                    <h5><span class="text-bold">Indicações realizadas:</span>   {{ $indicate["indications_made"]                                }}</h5>
+                    <h5><span class="text-bold">Descontos concebidos:</span> R$ {{ Helper::number_format($indicate["discounts_received"])       }}</h5>
+                    <h5><span class="text-bold">Descontos a receber:</span> R$  {{ Helper::number_format($indicate["discounts_to_be_received"]) }}</h5>
 
                     <p class="mb-2" >Quem indica amigo é!</p>
                     <p class="mb-2" >Ao indicar um amigo você ganha 20% de desconto na sua próxima mensalidade.</p>
