@@ -235,6 +235,7 @@ return [
         'View'         => Illuminate\Support\Facades\View::class,
 
         'Debugbar'     => Barryvdh\Debugbar\Facade::class,
+        'Helper'       => App\Helpers\Helper::class,
     ],
 
 ];
