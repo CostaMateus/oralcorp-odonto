@@ -242,4 +242,20 @@ class PersonalEasyService
 
         return $response;
     }
+
+    /**
+     * Recupera os descontos do usuário
+     *
+     * @return void
+     */
+    public function getDiscounts()
+    {
+        $data = [
+            "nropac" => auth()->user()->external_id,
+        ];
+
+        $response = $this->makeRequest("RPCGetPacienteDesconto", $data);
+
+        return $response;
+    }
 }
