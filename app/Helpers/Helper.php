@@ -27,6 +27,11 @@ class Helper
         return $return;
     }
 
+    public static function number_format(int $number)
+    {
+        return number_format($number, 2, ',', ' ');
+    }
+
     // public static function usort(&$data)
     // {
     //     usort($data, function($a, $b) {
