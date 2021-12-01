@@ -62,7 +62,7 @@
         const title       = $(this).data("title");
         const description = $(this).data("description");
 
-        $("#m-link").attr("href", "{{ route('patient.contacts') }}/?t=" + id);
+        $("#m-link").attr("href", "{{ route('patient.contacts') }}" + "?t=" + id);
         $("#m-title").html(title);
         $("#m-description").html(description);
 
