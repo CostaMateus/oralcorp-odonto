@@ -52,9 +52,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function contacts()
+    public function contacts(Request $request)
     {
-        return view("patient.contacts");
+        $treatment = ($request->t) ? Helper::getTreatments()[$request->t]["title"] : "";
+
+        return view("patient.contacts", compact(["treatment"]));
     }
 
     /**
@@ -157,11 +159,22 @@ class HomeController extends Controller
      */
     public function postCheckin(Request $request)
     {
-        $response = $this->service->postCheckin($request->input('checkin'));
+        $response = $this->service->postCheckin($request->input("checkin"));
 
         PersonalEasyHelper::dataConverter("postCheckin", $response["data"]);
 
         return $response["data"][0];
+    }
+
+    public function sendMessage(Request $request)
+    {
+        $msg  = $request->input("message");
+
+        $mail = \Mail::to("costa.mack95@gmail.com")->send(new \App\Mail\Contact($msg));
+
+        $response["statusText"] = "Mensagem enviada com sucesso. Aguarde o contato de nosso equipe.";
+
+        return $response;
     }
 
 }
