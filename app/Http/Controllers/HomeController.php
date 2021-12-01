@@ -139,11 +139,10 @@ class HomeController extends Controller
 
     public function indicate()
     {
-        $indicate = [
-            "indications_made" => "2",
-            "discount_received" => "50,00",
-            "discount_to_receive" => "35,50",
-        ];
+        $response = $this->service->getDiscounts();
+        PersonalEasyHelper::dataConverter("discounts", $response["data"]);
+
+        $indicate = $response["data"][0];
 
         return view("patient.indicate", compact(["indicate"]));
     }
