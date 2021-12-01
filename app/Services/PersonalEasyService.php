@@ -190,7 +190,8 @@ class PersonalEasyService
 
         return $response;
     }
-     /**
+
+    /**
      * Consulta Financeiro do Paciente
      *
      * @param string $email
@@ -208,6 +209,25 @@ class PersonalEasyService
         $response = $this->makeRequest("RPCGetPacienteMensalidade", $data, $code);
 
         PersonalEasyHelper::dataConverter("financial", $response["data"]);
+
+        return $response;
+    }
+
+    public function getCheckinOptions()
+    {
+        $response = $this->makeRequest("RPCGetBT");
+
+        return $response;
+    }
+
+    public function postCheckin(string $checkin)
+    {
+        $data = [
+            "nropac" => auth()->user()->external_id,
+            "btsel"  => (int) $checkin
+        ];
+
+        $response = $this->makeRequest("RPCPutBTSel", $data);
 
         return $response;
     }
