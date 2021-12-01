@@ -123,7 +123,7 @@ class PersonalEasyHelper
 
             case "images":
                 $newKeys = [
-                    // "nropac"   =>  "external_id",
+                    "imagem" => "image",
                 ];
                 self::arrayReplaceKeys($data, $newKeys);
             break;
