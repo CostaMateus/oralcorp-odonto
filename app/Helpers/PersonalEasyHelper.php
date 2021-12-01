@@ -142,6 +142,23 @@ class PersonalEasyHelper
                 ];
                 self::arrayReplaceKeys($data, $newKeys);
             break;
+
+            case "checkin":
+                $newKeys = [
+                    "bt"       => "checkin_id",
+                    "bt_descr" => "name",
+                    "bt_ag"    => "schedule",
+                    "bt_reag"  => "reschedule"
+                ];
+                self::arrayReplaceKeys($data, $newKeys);
+            break;
+
+            case "postCheckin":
+                $newKeys = [
+                    "tx" => "statusText",
+                ];
+                self::arrayReplaceKeys($data, $newKeys);
+            break;
         }
 
     }
@@ -163,15 +180,16 @@ class PersonalEasyHelper
                 {
                     $arr[$new] = null;
                 }
+
                 // Separar a data e a hora
                 if ($new == "schedule")
                 {
-                    if (strlen($arr[$new]) == 1){
+                    if (strlen($arr[$new]) == 1)
                         self::toBoolean($arr, $new, $arr[$new]);
-                    }else{
+                    else
                         self::convertDate($arr, $new, $arr[$new]);
-                    }
                 }
+
                 // // only cases: 1/2/3/4/5
                 // if (in_array($new, ["above", "overdue", "opened"]))
                 // {
