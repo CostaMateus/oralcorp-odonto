@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\PersonalEasyService;
 use Illuminate\Http\Request;
+use App\Helpers\PersonalEasyHelper;
 use Illuminate\Support\Facades\Auth;
+use App\Services\PersonalEasyService;
 
 class HomeController extends Controller
 {
@@ -149,25 +150,22 @@ class HomeController extends Controller
 
     public function checkin()
     {
-        $checkins = [
-            [
-                "title" => "Consulta aparelho"
-            ],[
-                "title" => "Consulta clínica geral"
-            ],[
-                "title" => "Primeira vez"
-            ],[
-                "title" => "Preferencial"
-            ],[
-                "title" => "Radiologia"
-            ],[
-                "title" => "Remarcação"
-            ],[
-                "title" => "Financeiro"
-            ],
-        ];
+        $response = $this->service->getCheckinOptions();
+        PersonalEasyHelper::dataConverter("checkin", $response["data"]);
+
+        // remover array_unique() caso seja resolvido os dados duplicados
+        $checkins = array_unique($response["data"], SORT_REGULAR);
 
         return view("patient.checkin", compact(["checkins"]));
+    }
+
+    public function postCheckin(Request $request)
+    {
+        $response = $this->service->postCheckin($request->input('checkin'));
+
+        PersonalEasyHelper::dataConverter("postCheckin", $response["data"]);
+
+        return $response["data"][0];
     }
 
 }
