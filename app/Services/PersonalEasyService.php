@@ -213,6 +213,11 @@ class PersonalEasyService
         return $response;
     }
 
+    /**
+     * Consulta opções de check-in
+     *
+     * @return array
+     */
     public function getCheckinOptions()
     {
         $response = $this->makeRequest("RPCGetBT");
@@ -220,6 +225,12 @@ class PersonalEasyService
         return $response;
     }
 
+    /**
+     * Efetua um check-in o id
+     *
+     * @param string $checkin
+     * @return void
+     */
     public function postCheckin(string $checkin)
     {
         $data = [
