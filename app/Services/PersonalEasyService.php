@@ -194,21 +194,18 @@ class PersonalEasyService
     /**
      * Consulta Financeiro do Paciente
      *
-     * @param string $email
-     * @param string $code
      * @return array
      */
-    public function getFinancial(string $email)
+    public function getFinancial()
     {
         $data = [
-            "email" => $email,
+            // funciona tanto com nropac, com email qnt sem parametro nenhum,
+            // confirmar com Rogério
+            // "nropac" => auth()->user()->external_id,
+            // "email"  => auth()->user()->email,
         ];
 
-        $code = auth()->user()->clinic->code;
-
-        $response = $this->makeRequest("RPCGetPacienteMensalidade", $data, $code);
-
-        PersonalEasyHelper::dataConverter("financial", $response["data"]);
+        $response = $this->makeRequest("RPCGetPacienteMensalidade", $data);
 
         return $response;
     }

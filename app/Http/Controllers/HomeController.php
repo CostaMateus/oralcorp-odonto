@@ -138,14 +138,13 @@ class HomeController extends Controller
      */
     public function financial()
     {
+        $response = $this->service->getFinancial();
 
-        $response = $this->service->getFinancial(Auth::user()->email);
+        PersonalEasyHelper::dataConverter("financial", $response["data"]);
 
         $financial = $response["data"];
 
-        return view("patient.financial", compact([
-            "financial"
-        ]));
+        return view("patient.financial", compact(["financial"]));
     }
 
     /**
