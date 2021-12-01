@@ -136,14 +136,12 @@ class PersonalEasyService
     public function getStartImage(string $patient_id = null)
     {
         $data = [
-            "nropac" => $patient_id ?? auth()->user()->external_id,
+            // funciona tanto com nropac, com email qnt sem parametro nenhum,
+            // confirmar com Rogério
+            // "nropac" => $patient_id ?? auth()->user()->external_id,
         ];
 
-        $code = auth()->user() ? auth()->user()->clinic->code : "aodonto2";
-
-        $response = $this->makeRequest("RPCGetPacienteImagemIni", $data, $code);
-
-        if ($response["data"]) PersonalEasyHelper::dataConverter("images", $response["data"]);
+        $response = $this->makeRequest("RPCGetPacienteImagemIni", $data);
 
         return $response;
     }
@@ -157,14 +155,12 @@ class PersonalEasyService
     public function getEndImage(string $patient_id = null)
     {
         $data = [
-            "nropac" => $patient_id ?? auth()->user()->external_id,
+            // funciona tanto com nropac, com email qnt sem parametro nenhum,
+            // confirmar com Rogério
+            // "nropac" => $patient_id ?? auth()->user()->external_id,
         ];
 
-        $code = auth()->user() ? auth()->user()->clinic->code : "aodonto2";
-
-        $response = $this->makeRequest("RPCGetPacienteImagemFin", $data, $code);
-
-        if ($response["data"]) PersonalEasyHelper::dataConverter("images", $response["data"]);
+        $response = $this->makeRequest("RPCGetPacienteImagemFin", $data);
 
         return $response;
     }
