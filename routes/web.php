@@ -33,7 +33,9 @@ Route::middleware(["auth"])->group(function () {
     Route::get("/meus-sorrisos", [HomeController::class, "mySmiles"])  ->name("patient.my_smiles");
     Route::get("/financeiro",    [HomeController::class, "financial"]) ->name("patient.financial");
     Route::get("/indique",       [HomeController::class, "indicate"])  ->name("patient.indicate");
-    Route::get("/checkin",       [HomeController::class, "checkin"])   ->name("patient.checkin");
+
+    Route::get("/checkin",       [HomeController::class, "checkin"])->name("patient.checkin");
+    Route::post("/checkin",      [HomeController::class, "postCheckin"])->name("patient.post.checkin");
 
     Route::middleware(["role:admin"])->group(function () {
 
@@ -42,5 +44,3 @@ Route::middleware(["auth"])->group(function () {
     });
 
 });
-
-// 
