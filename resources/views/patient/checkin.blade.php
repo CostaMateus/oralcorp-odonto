@@ -53,7 +53,7 @@
                             @if ($c["name"])
                                 <div class="form-group my-3">
                                     <div class="form-check" >
-                                        <input class="form-check-input" type="radio" name="checkin" id="checkin_id_{{ $c["checkin_id"] }}" value="{{ $c["checkin_id"] }}">
+                                        <input class="form-check-input" type="radio" name="checkin" id="checkin_id_{{ $c["checkin_id"] }}" value="{{ $c["checkin_id"] }}" required >
                                         <label class="form-check-label" for="checkin_id_{{ $c["checkin_id"] }}">{{ $c["name"] }}</label>
                                     </div>
                                 </div>
