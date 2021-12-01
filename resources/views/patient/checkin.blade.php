@@ -36,7 +36,7 @@
         <p class="mb-0 text-danger" > -> amodonto -> retorna sucesso no checkin</p>
     </div>
 
-    <div id="modal-checkin" class="modal fade show" aria-modal="true" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div id="modal-checkin" class="modal fade" aria-modal="true" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -49,7 +49,7 @@
                     <p>Selecione a Modalidade do seu check-in</p>
                     <form id="checkin-form">
                         @csrf
-                        @foreach ( $checkins as $key => $c )
+                        @foreach ( $checkins as $c )
                             @if ($c["name"])
                                 <div class="form-group my-3">
                                     <div class="form-check" >
