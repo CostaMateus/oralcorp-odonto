@@ -12,7 +12,9 @@
 @section('content')
 
     <div class="row">
+
         @forelse ( $appointments as $apt )
+
             <div class="col-12 col-sm-4 col-md-3 col-xl-2">
                 <div class="card p-3">
                     <div class="row">
@@ -26,11 +28,15 @@
                     </div>
                 </div>
             </div>
+
         @empty
+
             <div class="col col-md-8 mx-auto p-3">
                 <h4>Você ainda não possui horário marcado.</h4>
             </div>
+
         @endforelse
+
     </div>
 
 @stop

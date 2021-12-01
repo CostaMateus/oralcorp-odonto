@@ -19,6 +19,7 @@
     <div class="row">
 
         @forelse ( $financial as $f )
+
             <div class="col-12 col-sm-4 col-md-3 col-xl-2">
                 <div class="card p-3">
                     <div class="text-md-center">
@@ -27,7 +28,9 @@
                     </div>
                 </div>
             </div>
+
         @empty
+
             <div class="col">
                 <div class="alert alert-success" role="alert">
                     Sem mensalidades pendentes!
@@ -50,6 +53,7 @@
                     </div>
                 </div>
             </div>
+
         @endforelse
 
     </div>

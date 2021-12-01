@@ -13,6 +13,7 @@
     <div class="row">
 
         @foreach ($treatments as $key => $t)
+
             <div class="col-12 col-md-6 col-lg-3">
                 <a class="treatment" role="button"
                     data-id="{{ $key }}"
@@ -27,6 +28,7 @@
                     </div>
                 </a>
             </div>
+
         @endforeach
 
     </div>

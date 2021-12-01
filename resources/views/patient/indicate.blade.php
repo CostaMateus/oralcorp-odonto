@@ -12,6 +12,7 @@
 @section('content')
 
     <div class="card h-100 w-100 mb-0">
+
         <div class="row">
             <div class="col-12 col-lg-6 py-3 pl-4 pr-3">
                 <h5><span class="text-bold">Indicações realizadas:</span>   {{ $indicate["indications_made"]                                }}</h5>
@@ -32,6 +33,7 @@
                 <img class="img-fluid w-80" src="{{ asset('images/indique.png') }}" alt="Tratamento">
             </div>
         </div>
+
     </div>
 
     {{-- remover qnd resolvido --}}

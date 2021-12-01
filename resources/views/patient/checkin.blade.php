@@ -12,6 +12,7 @@
 @section('content')
 
     <div class="card h-100 w-100 mb-0">
+
         <div class="row">
             <div class="col-12 py-3 px-4">
                 <h5>Faça seu check-in pelo site e evite filas e aglomerações</h5>
@@ -20,6 +21,7 @@
                 <p id="cf-status" class="mt-3 mb-0 d-none" ></p>
             </div>
         </div>
+
     </div>
 
     {{-- remover qnd resolvido --}}
