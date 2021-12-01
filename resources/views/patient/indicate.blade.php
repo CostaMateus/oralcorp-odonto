@@ -26,7 +26,7 @@
                     <p class="mb-0" >1) Indique um amigo para fazer uma consulta na cliníca Instituto Oral Corp.</p>
                     <p class="mb-0" >2) No ato do cadastramento da primeira consulta na cliníca peça para o seu amigo dizer que você o indicou.</p>
                     <p class="mb-2" >3) Você será notificado pelo app que ganhou o desconto, caso o seu amigo inicie o tratamento ortodôntico conosco.</p>
-                    <p>Entendeu? Que tal indicar um amigo agora?</p>
+                    <p class="mb-0" >Entendeu? Que tal indicar um amigo agora?</p>
 
                     {{-- <button class="btn btn-primary btn-oc" data-toggle="modal" data-target="#modal-default">Indicar</button> --}}
                 </div>
@@ -36,6 +36,11 @@
             </div>
         </div>
 
+        {{-- remover qnd resolvido --}}
+        <p class="mt-4 mb-0 text-danger" >RPCGetPacienteDesconto</p>
+        <p class="mb-0 text-danger" > -> ioc      -> retorna error</p>
+        <p class="mb-0 text-danger" > -> aodonto2 -> ok, apenas valores -1</p>
+        <p class="mb-0 text-danger" > -> amodonto -> ok, apenas valores -1</p>
     </div>
 
 @stop
