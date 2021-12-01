@@ -130,7 +130,7 @@ class PersonalEasyHelper
 
             case "schedule":
                 $newKeys = [
-                    "horario"  => "schedule",
+                    "horario" => "schedule",
                 ];
                 self::arrayReplaceKeys($data, $newKeys);
             break;
@@ -139,6 +139,15 @@ class PersonalEasyHelper
                 $newKeys = [
                     "data"  => "date",
                     "valor" => "value"
+                ];
+                self::arrayReplaceKeys($data, $newKeys);
+            break;
+
+            case "discounts":
+                $newKeys = [
+                    "indicacoes_efetivadas" => "indications_made",
+                    "descontos_concedidos"  => "discounts_received",
+                    "descontos_a_receber"   => "discounts_to_be_received"
                 ];
                 self::arrayReplaceKeys($data, $newKeys);
             break;
@@ -190,11 +199,11 @@ class PersonalEasyHelper
                         self::convertDate($arr, $new, $arr[$new]);
                 }
 
-                // // only cases: 1/2/3/4/5
-                // if (in_array($new, ["above", "overdue", "opened"]))
-                // {
-                //     self::toBoolean($arr, $new, $arr[$new]);
-                // }
+                // only case: discounts
+                if (in_array($new, ["indications_made", "discounts_received", "discounts_to_be_received"]))
+                {
+                    $arr[$new] = ($arr[$new] >= 0) ? $arr[$new] : 0;
+                }
 
                 // // only cases: 1/2/3/4/5
                 // if ($new == "scheduled")
