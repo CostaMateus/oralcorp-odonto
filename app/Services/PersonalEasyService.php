@@ -226,10 +226,10 @@ class PersonalEasyService
     }
 
     /**
-     * Efetua um check-in o id
+     * Efetua um check-in dado o id
      *
      * @param string $checkin
-     * @return void
+     * @return array
      */
     public function postCheckin(string $checkin)
     {
@@ -246,7 +246,7 @@ class PersonalEasyService
     /**
      * Recupera os descontos do usuário
      *
-     * @return void
+     * @return array
      */
     public function getDiscounts()
     {
