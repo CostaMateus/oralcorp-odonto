@@ -4,7 +4,6 @@
 @section("title")
 @section("title_posfix")
 
-
 @section('content_header')
     <h1 class="m-0 text-dark">Nossos Tratamentos</h1>
 @stop
@@ -43,7 +42,7 @@
                 </div>
                 <div id="m-description" class="modal-body"></div>
                 <div class="modal-footer float-right">
-                    <button type="button" class="btn btn-oc">Tenho interesse</button>
+                    <a id="m-link" class="btn btn-oc">Tenho interesse</a>
                 </div>
             </div>
         </div>
@@ -57,9 +56,11 @@
 <script>
     // MODAL-TREATMENT
     $(document).on("click", ".treatment", function() {
+        const id          = $(this).data("id");
         const title       = $(this).data("title");
         const description = $(this).data("description");
 
+        $("#m-link").attr("href", "{{ route('patient.contacts') }}/?t=" + id);
         $("#m-title").html(title);
         $("#m-description").html(description);
 
