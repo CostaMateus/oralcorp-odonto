@@ -23,7 +23,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Exibe tela inicial do sistema
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -35,9 +35,9 @@ class HomeController extends Controller
     }
 
     /**
-     * Undocumented function
+     * Exibe tela de estática dos tratamentos ofertados
      *
-     * @return void
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function treatments()
     {
@@ -80,15 +80,20 @@ class HomeController extends Controller
         return view("patient.our_treatments", compact(["treatments"]));
     }
 
+    /**
+     * Exibe tela de opções de contato com as unidades
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function contacts()
     {
         return view("patient.contacts");
     }
 
     /**
-     * Retorna as consultas agendadas
+     * Exibe tela de consultas agendadas
      *
-     * @return void
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function schedule()
     {
@@ -103,9 +108,9 @@ class HomeController extends Controller
     }
 
     /**
-     * Retorna as fotos do antes e depois
+     * Exibe tela do sorriso de antes e depois
      *
-     * @return void
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function mySmiles()
     {
@@ -125,6 +130,12 @@ class HomeController extends Controller
         ]));
     }
 
+
+    /**
+     * Exibe tela do financeiro
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function financial()
     {
 
@@ -137,6 +148,11 @@ class HomeController extends Controller
         ]));
     }
 
+    /**
+     * Exibe tela de indicação e descontos
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function indicate()
     {
         $response = $this->service->getDiscounts();
@@ -147,6 +163,11 @@ class HomeController extends Controller
         return view("patient.indicate", compact(["indicate"]));
     }
 
+    /**
+     * Exibe tela de check-in
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function checkin()
     {
         $response = $this->service->getCheckinOptions();
@@ -158,6 +179,12 @@ class HomeController extends Controller
         return view("patient.checkin", compact(["checkins"]));
     }
 
+    /**
+     * Envia o check-in do usuário para o P.E.
+     *
+     * @param Request $request
+     * @return array
+     */
     public function postCheckin(Request $request)
     {
         $response = $this->service->postCheckin($request->input('checkin'));
