@@ -114,22 +114,26 @@ class HomeController extends Controller
      */
     public function mySmiles()
     {
-        $response =[
-            [
-                $start = $this->service->getStartImage(Auth::user()->external_id)
-            ],[
-                $end = $this->service->getEndImage(Auth::user()->external_id)
-            ],
+        $code      = auth()->user()->clinic->code;
+        $response1 = $this->service->getStartImage();
+        $response2 = $this->service->getEndImage();
+
+        PersonalEasyHelper::dataConverter("images", $response1["data"]);
+        PersonalEasyHelper::dataConverter("images", $response2["data"]);
+
+        $startImg  = $response1["data"][0]["image"];
+        $endImg    = $response2["data"][0]["image"];
+
+        $startImg  = (is_null($startImg)) ? $startImg : "https://api.personal-ed.com.br/$code/getImagem?filename=$startImg";
+        $endImg    = (is_null($endImg))   ? $endImg   : "https://api.personal-ed.com.br/$code/getImagem?filename=$endImg";
+
+        $smile     = [
+            "start" => $startImg,
+            "end"   => $endImg
         ];
 
-        $smile = $response;
-        //dd($smile[1][0]["data"]);
-
-        return view("patient.my_smiles", compact([
-            "smile"
-        ]));
+        return view("patient.my_smiles", compact(["smile"]));
     }
-
 
     /**
      * Exibe tela do financeiro
