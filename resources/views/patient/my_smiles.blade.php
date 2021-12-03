@@ -16,8 +16,11 @@
             <div class="card h-100">
                 <div class="card-body">
                     <h3 class="w-100">Antes</h3>
-                    @if ($data["before"])
-                        <img src="https://images-cdn.9gag.com/photo/a9ALB5j_700b.jpg" class="img-fluid w-50" alt="Sorriso antes">
+                    @if (!empty($smile["start"]))
+                        <a href="#" class="zoom">
+                            <img src="{{ $smile["start"] }}" class="img-fluid w-50" alt="Sorriso antes">
+                            {{-- <img src="https://images-cdn.9gag.com/photo/a9ALB5j_700b.jpg" class="img-fluid w-50" alt="Sorriso antes"> --}}
+                        </a>
                     @else
                         <h6 class="mb-4 text-muted">Imagem não cadastrada</h6>
                         <img src="{{ asset('images/no_image.png') }}" class="img-fluid w-50" alt="Sorriso antes">
@@ -30,8 +33,11 @@
             <div class="card h-100">
                 <div class="card-body">
                     <h3 class="w-100">Depois</h3>
-                    @if ($data["after"])
-                        <img src="https://images-cdn.9gag.com/photo/a9ALB5j_700b.jpg" class="img-fluid w-50" alt="Sorriso depois">
+                    @if (!empty($smile["end"]))
+                        <a href="#" class="zoom">
+                            <img src="{{ $smile["end"] }}" class="img-fluid w-50" alt="Sorriso depois">
+                            {{-- <img src="https://www.42frases.com.br/wp-content/uploads/2018/10/frases-dr-house.jpg" class="img-fluid w-50" alt="Sorriso depois"> --}}
+                        </a>
                     @else
                         <h6 class="mb-4 text-muted">Imagem não cadastrada</h6>
                         <img src="{{ asset('images/no_image.png') }}" class="img-fluid w-50" alt="Sorriso depois">
@@ -40,7 +46,38 @@
             </div>
         </div>
 
+        <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" data-dismiss="modal">
+                <div class="modal-content" >
+                    <div class="modal-body">
+                        <img src="" id="imagepreview" class="w-100" >
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
+
+    {{-- remover qnd resolvido --}}
+    <p class="mt-4 mb-0 text-danger" >RPCGetPacienteImagemIni</p>
+    <p class="mt-0 mb-0 text-danger" >RPCGetPacienteImagemFin</p>
+    <p class="mb-0 text-danger" > -> ioc      -> independente dos parametros passados, retorna vazio</p>
+    <p class="mb-0 text-danger" > -> aodonto2 -> independente dos parametros passados, retorna vazio</p>
+    <p class="mb-0 text-danger" > -> amodonto -> independente dos parametros passados, retorna vazio</p>
 @stop
 
 @include('patient.footer')
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+
+            $(".zoom").on("click", function() {
+                var img = $(this).find("img").attr("src");
+                $("#imagepreview").attr("src", img);
+                $("#imagemodal").modal("show");
+            });
+
+        });
+    </script>
+@stop

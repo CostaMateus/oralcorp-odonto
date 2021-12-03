@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+      - main
+name: Deploy on push on main or homol
+jobs:
+  deploy-on-prod:
+    name: Deploy prod
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get latest code
+      uses: actions/checkout@v2
+
+    - name: SFTP Deploy
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.1
+
+      with:
+        server: ${{ secrets.SFTP_HOST }}
+        username: ${{ secrets.SFTP_USER }}
+        ssh_private_key: ${{ secrets.SFTP_PASS }}
+        local_path: './*'
+        remote_path: '/var/www/app.oralcorp.com.br/htdocs'
+        args: '-o ConnectTimeout=5'
