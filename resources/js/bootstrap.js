@@ -11,7 +11,7 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('overlayscrollbars');
-    require('../../vendor/almasaeed2010/adminlte/dist/js/adminlte');
+    require('../../node_modules/admin-lte/dist/js/adminlte');
 
     require('bootstrap');
 } catch (e) {}
