@@ -36,7 +36,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Exibe tela de estática dos tratamentos ofertados
+     * Exibe tela estática dos tratamentos ofertados
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -172,7 +172,7 @@ class HomeController extends Controller
 
         $mail = \Mail::to("costa.mack95@gmail.com")->send(new \App\Mail\Contact($msg));
 
-        $response["statusText"] = "Mensagem enviada com sucesso. Aguarde o contato de nosso equipe.";
+        $response["statusText"] = "Mensagem enviada com sucesso. Aguarde o contato de nossa equipe.";
 
         return $response;
     }
