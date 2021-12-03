@@ -1,9 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'AdminLTE')
+@section("title_prefix", "Início")
+@section("title")
+@section("title_posfix")
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Dashboard</h1>
+    <h1 class="m-0 text-dark">início</h1>
 @stop
 
 @section('content')
@@ -17,3 +19,5 @@
         </div>
     </div>
 @stop
+
+@include('admin.footer')

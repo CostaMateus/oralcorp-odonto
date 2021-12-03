@@ -123,14 +123,14 @@ class PersonalEasyHelper
 
             case "images":
                 $newKeys = [
-                    // "nropac"   =>  "external_id",
+                    "imagem" => "image",
                 ];
                 self::arrayReplaceKeys($data, $newKeys);
             break;
 
             case "schedule":
                 $newKeys = [
-                    "horario"  => "schedule",
+                    "horario" => "schedule",
                 ];
                 self::arrayReplaceKeys($data, $newKeys);
             break;
@@ -139,6 +139,32 @@ class PersonalEasyHelper
                 $newKeys = [
                     "data"  => "date",
                     "valor" => "value"
+                ];
+                self::arrayReplaceKeys($data, $newKeys);
+            break;
+
+            case "discounts":
+                $newKeys = [
+                    "indicacoes_efetivadas" => "indications_made",
+                    "descontos_concedidos"  => "discounts_received",
+                    "descontos_a_receber"   => "discounts_to_be_received"
+                ];
+                self::arrayReplaceKeys($data, $newKeys);
+            break;
+
+            case "checkin":
+                $newKeys = [
+                    "bt"       => "checkin_id",
+                    "bt_descr" => "name",
+                    "bt_ag"    => "schedule",
+                    "bt_reag"  => "reschedule"
+                ];
+                self::arrayReplaceKeys($data, $newKeys);
+            break;
+
+            case "postCheckin":
+                $newKeys = [
+                    "tx" => "statusText",
                 ];
                 self::arrayReplaceKeys($data, $newKeys);
             break;
@@ -163,20 +189,21 @@ class PersonalEasyHelper
                 {
                     $arr[$new] = null;
                 }
+
                 // Separar a data e a hora
                 if ($new == "schedule")
                 {
-                    if (strlen($arr[$new]) == 1){
+                    if (strlen($arr[$new]) == 1)
                         self::toBoolean($arr, $new, $arr[$new]);
-                    }else{
+                    else
                         self::convertDate($arr, $new, $arr[$new]);
-                    }
                 }
-                // // only cases: 1/2/3/4/5
-                // if (in_array($new, ["above", "overdue", "opened"]))
-                // {
-                //     self::toBoolean($arr, $new, $arr[$new]);
-                // }
+
+                // only case: discounts
+                if (in_array($new, ["indications_made", "discounts_received", "discounts_to_be_received"]))
+                {
+                    $arr[$new] = ($arr[$new] >= 0) ? $arr[$new] : 0;
+                }
 
                 // // only cases: 1/2/3/4/5
                 // if ($new == "scheduled")

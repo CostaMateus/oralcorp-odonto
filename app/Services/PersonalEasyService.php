@@ -136,14 +136,12 @@ class PersonalEasyService
     public function getStartImage(string $patient_id = null)
     {
         $data = [
-            "nropac" => $patient_id ?? auth()->user()->external_id,
+            // funciona tanto com nropac, com email qnt sem parametro nenhum,
+            // confirmar com Rogério
+            // "nropac" => $patient_id ?? auth()->user()->external_id,
         ];
 
-        $code = auth()->user() ? auth()->user()->clinic->code : "aodonto2";
-
-        $response = $this->makeRequest("RPCGetPacienteImagemIni", $data, $code);
-
-        if ($response["data"]) PersonalEasyHelper::dataConverter("images", $response["data"]);
+        $response = $this->makeRequest("RPCGetPacienteImagemIni", $data);
 
         return $response;
     }
@@ -157,14 +155,12 @@ class PersonalEasyService
     public function getEndImage(string $patient_id = null)
     {
         $data = [
-            "nropac" => $patient_id ?? auth()->user()->external_id,
+            // funciona tanto com nropac, com email qnt sem parametro nenhum,
+            // confirmar com Rogério
+            // "nropac" => $patient_id ?? auth()->user()->external_id,
         ];
 
-        $code = auth()->user() ? auth()->user()->clinic->code : "aodonto2";
-
-        $response = $this->makeRequest("RPCGetPacienteImagemFin", $data, $code);
-
-        if ($response["data"]) PersonalEasyHelper::dataConverter("images", $response["data"]);
+        $response = $this->makeRequest("RPCGetPacienteImagemFin", $data);
 
         return $response;
     }
@@ -190,24 +186,68 @@ class PersonalEasyService
 
         return $response;
     }
-     /**
+
+    /**
      * Consulta Financeiro do Paciente
      *
-     * @param string $email
-     * @param string $code
      * @return array
      */
-    public function getFinancial(string $email)
+    public function getFinancial()
     {
         $data = [
-            "email" => $email,
+            // funciona tanto com nropac, com email qnt sem parametro nenhum,
+            // confirmar com Rogério
+            // "nropac" => auth()->user()->external_id,
+            // "email"  => auth()->user()->email,
         ];
 
-        $code = auth()->user()->clinic->code;
+        $response = $this->makeRequest("RPCGetPacienteMensalidade", $data);
 
-        $response = $this->makeRequest("RPCGetPacienteMensalidade", $data, $code);
+        return $response;
+    }
 
-        PersonalEasyHelper::dataConverter("financial", $response["data"]);
+    /**
+     * Consulta opções de check-in
+     *
+     * @return array
+     */
+    public function getCheckinOptions()
+    {
+        $response = $this->makeRequest("RPCGetBT");
+
+        return $response;
+    }
+
+    /**
+     * Efetua um check-in dado o id
+     *
+     * @param string $checkin
+     * @return array
+     */
+    public function postCheckin(string $checkin)
+    {
+        $data = [
+            "nropac" => auth()->user()->external_id,
+            "btsel"  => (int) $checkin
+        ];
+
+        $response = $this->makeRequest("RPCPutBTSel", $data);
+
+        return $response;
+    }
+
+    /**
+     * Recupera os descontos do usuário
+     *
+     * @return array
+     */
+    public function getDiscounts()
+    {
+        $data = [
+            "nropac" => auth()->user()->external_id,
+        ];
+
+        $response = $this->makeRequest("RPCGetPacienteDesconto", $data);
 
         return $response;
     }
