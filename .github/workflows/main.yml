@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - main
-name: Deploy on push on main or homol
+name: Deploy on push on main
 jobs:
   deploy-on-prod:
     name: Deploy prod
@@ -10,6 +10,16 @@ jobs:
     steps:
     - name: Get latest code
       uses: actions/checkout@v2
+
+    - name: Use Node.js 12
+      uses: actions/setup-node@v2-beta
+      with:
+        node-version: '12'
+
+    - name: Build Project
+      run: |
+        npm install
+        npm run prod
 
     - name: SFTP Deploy
       uses: wlixcc/SFTP-Deploy-Action@v1.2.1
