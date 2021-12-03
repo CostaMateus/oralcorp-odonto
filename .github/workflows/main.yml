@@ -19,4 +19,4 @@ jobs:
           username: ${{ secrets.SFTP_USER }}
           password: ${{ secrets.SFTP_PASS }}
           sourceDir: '/'
-          targetDir: '/var/www/app.oralcorp.com.br/htdocs'
+          targetDir: '/htdocs/'
