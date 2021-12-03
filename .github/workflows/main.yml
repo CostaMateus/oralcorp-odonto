@@ -2,6 +2,14 @@ on:
   push:
     branches:
       - main
+    # Enables manually triggering of Workflow with file synchronization option
+  workflow_dispatch:
+    inputs:
+      sync:
+        description: "File synchronization"
+        required: true
+        default: "delta"
+
 name: Deploy on push on main
 jobs:
   deploy-on-prod:
@@ -10,6 +18,8 @@ jobs:
     steps:
     - name: Get latest code
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
 
     - name: SFTP Deploy
       uses: milanmk/actions-file-deployer@master
@@ -20,3 +30,4 @@ jobs:
         remote-password: ${{ secrets.SFTP_PASS }}
         local-path: "/*"
         remote-path: "/var/www/app.oralcorp.com.br/htdocs/"
+        sync: "full"
