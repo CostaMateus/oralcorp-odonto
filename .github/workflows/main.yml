@@ -28,6 +28,5 @@ jobs:
         remote-host: ${{ secrets.SFTP_HOST }}
         remote-user: ${{ secrets.SFTP_USER }}
         remote-password: ${{ secrets.SFTP_PASS }}
-        local-path: "/*"
         remote-path: "/var/www/app.oralcorp.com.br/htdocs/"
         sync: "full"
