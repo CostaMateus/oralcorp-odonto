@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - main
-name: Deploy on push on main or homol
+name: Deploy on push on main
 jobs:
   deploy-on-prod:
     name: Deploy prod
@@ -11,13 +11,22 @@ jobs:
     - name: Get latest code
       uses: actions/checkout@v2
 
-    - name: SFTP Deploy
-      uses: wlixcc/SFTP-Deploy-Action@v1.2.1
-
+    - name: Use Node.js 12
+      uses: actions/setup-node@v2-beta
       with:
-        server: ${{ secrets.SFTP_HOST }}
-        username: ${{ secrets.SFTP_USER }}
-        ssh_private_key: ${{ secrets.SFTP_PASS }}
-        local_path: './*'
-        remote_path: '/var/www/app.oralcorp.com.br/htdocs'
-        args: '-o ConnectTimeout=5'
+        node-version: '12'
+
+    - name: Build Project
+      run: |
+        npm install
+        npm run prod
+
+    - name: SFTP Deploy
+      uses: AbleLincoln/push-to-sftp@v1.0
+      with:
+          host: ${{ secrets.SFTP_HOST }}
+          port: 22
+          username: ${{ secrets.SFTP_USER }}
+          password: ${{ secrets.SFTP_PASS }}
+          local-dir: './*'
+          server-dir: '/var/www/app.oralcorp.com.br/htdocs'
