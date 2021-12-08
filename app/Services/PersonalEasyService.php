@@ -172,17 +172,13 @@ class PersonalEasyService
      * @param string $code
      * @return array
      */
-    public function getSchedule(string $email)
+    public function getSchedule()
     {
         $data = [
-            "email" => $email,
+            "nropac" => auth()->user()->external_id,
         ];
 
-        $code = auth()->user()->clinic->code;
-
-        $response = $this->makeRequest("RPCGetPacienteAgenda", $data, $code);
-
-        PersonalEasyHelper::dataConverter("schedule", $response["data"]);
+        $response = $this->makeRequest("RPCGetPacienteAgenda", $data);
 
         return $response;
     }
