@@ -66,14 +66,13 @@ class HomeController extends Controller
      */
     public function schedule()
     {
+        $response     = $this->service->getSchedule();
 
-        $response = $this->service->getSchedule(Auth::user()->email);
+        PersonalEasyHelper::dataConverter("schedule", $response["data"]);
 
         $appointments = $response["data"];
 
-        return view("patient.schedule", compact([
-            "appointments"
-        ]));
+        return view("patient.schedule", compact(["appointments"]));
     }
 
     /**
@@ -111,7 +110,7 @@ class HomeController extends Controller
      */
     public function financial()
     {
-        $response = $this->service->getFinancial();
+        $response  = $this->service->getFinancial();
 
         PersonalEasyHelper::dataConverter("financial", $response["data"]);
 
