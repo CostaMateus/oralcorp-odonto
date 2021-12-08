@@ -17,7 +17,7 @@
             <div class="col-12 py-3 px-4">
                 <h5>Faça seu check-in pelo site e evite filas e aglomerações</h5>
                 <p>Lembre-se, você precisa estar na clínica para fazer o Check-in</p>
-                <button type="submit" class="btn btn-primary btn-oc" >Fazer check-in</button>
+                <button id="make-checkin" type="button" class="btn btn-primary btn-oc" >Fazer check-in</button>
                 <p id="cf-status" class="mt-3 mb-0 d-none" ></p>
             </div>
         </div>
@@ -77,7 +77,7 @@
         $(document).ready(function() {
 
             // MODAL-TREATMENT
-            $(document).on("click", ".btn", function() {
+            $(document).on("click", "#make-checkin", function() {
                 $("#modal-checkin").modal("show");
 
                 $("#cf-sending").addClass("d-none");
