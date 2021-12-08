@@ -142,6 +142,8 @@ class HomeController extends Controller
      */
     public function checkin()
     {
+        if (auth()->user()->clinic->code == "aodonto2") return redirect()->route("/");
+
         $response = $this->service->getCheckinOptions();
         PersonalEasyHelper::dataConverter("checkin", $response["data"]);
 

@@ -117,8 +117,7 @@
                         $("#cf-status").removeClass("d-none").addClass("text-danger").html("Ocorreu um erro, tente novamente!");
                         $("#cf-sending").addClass("d-none");
                         $("#cf-submit").removeClass("disabled").find("i").addClass("d-none");
-                        // window.location.reload();
-                        // setTimeout(function () { window.location.reload() }, 1500);
+                        setTimeout(function () { window.location.reload() }, 1500);
                     }
                 });
             });

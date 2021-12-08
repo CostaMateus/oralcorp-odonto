@@ -17,8 +17,8 @@
             <div class="col-12 col-md-6 col-lg-3">
                 <a class="treatment" role="button"
                     data-id="{{ $key }}"
-                    data-title="{{ $t["title"]}}"
-                    data-description="{{ $t["description"]}}">
+                    data-title="{{ $t["title"] }}"
+                    data-description="{{ $t["description"] }}">
                     <div class="small-box bg-white">
                         <div class="inner text-center">
                             <img class="img-circle elevation-2 mb-2" src="{{ asset($t["image"]) }}" width="55" alt="Tratamento">
