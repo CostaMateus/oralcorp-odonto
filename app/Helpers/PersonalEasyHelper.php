@@ -130,7 +130,8 @@ class PersonalEasyHelper
 
             case "schedule":
                 $newKeys = [
-                    "horario" => "schedule",
+                    "horario"        => "schedule",
+                    "id_agendamento" => "schedule_id",
                 ];
                 self::arrayReplaceKeys($data, $newKeys);
             break;
