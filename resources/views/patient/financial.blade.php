@@ -48,7 +48,7 @@
                         </div>
                         <div class="modal-body">
                             <h4>Você não possui mensalidades pendentes.</h4>
-                            <button class="btn btn-primary btn-oc float-right" data-dismiss="modal" aria-label="Close">OK!</button>
+                            <button class="btn btn-oc float-right" data-dismiss="modal" aria-label="Close">OK!</button>
                         </div>
                     </div>
                 </div>

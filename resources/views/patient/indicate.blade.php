@@ -27,7 +27,7 @@
                 <p class="mb-2" >3) Você será notificado pelo app que ganhou o desconto, caso o seu amigo inicie o tratamento ortodôntico conosco.</p>
                 <p class="mb-0" >Entendeu? Que tal indicar um amigo agora?</p>
 
-                {{-- <button class="btn btn-primary btn-oc" data-toggle="modal" data-target="#modal-default">Indicar</button> --}}
+                {{-- <button class="btn btn-oc" data-toggle="modal" data-target="#modal-default">Indicar</button> --}}
             </div>
             <div class="col-12 col-lg-6 py-3 pr-4 pl-3 text-center d-flex align-items-center">
                 <img class="img-fluid w-80" src="{{ asset('images/indique.png') }}" alt="Tratamento">

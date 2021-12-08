@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <textarea class="form-control" id="message" name="message" rows="5" placeholder="Sua mensagem"></textarea>
                     </div>
-                    <button id="cf-submit" type="submit" class="btn btn-primary btn-oc">
+                    <button id="cf-submit" type="submit" class="btn btn-oc">
                         Enviar <i class="ml-2 d-none fas fa-spinner fa-spin text-white"></i>
                     </button>
 
