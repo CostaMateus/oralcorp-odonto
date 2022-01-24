@@ -23,41 +23,37 @@ class PersonalEasyController extends Controller
 
         if ($response["code"] != 200) return self::redirectLogin($response["code"]);
 
-        foreach ($response["data"] as $login)
+        $login    = reset($response["data"]);
+
+        if ($login["password"] != $request->password) return self::redirectLogin(404);
+
+        $user     = User::firstWhere("email", $request->email);
+
+        if (!$user)
         {
-            if ($login["password"] != $request->password) continue;
+            $user = User::create([
+                "clinic_id"   => $clinic->id,
+                "external_id" => $login["external_id"],
+                "name"        => explode(" ", $login["name"])[0],
+                "full_name"   => $login["name"],
+                "email"       => $request->email,
+                "phone"       => $login["phone"] ?? null,
+                "password"    => bcrypt($request->password . date("H:i:s")),
+            ]);
 
-            $user = User::firstWhere("email", $request->email);
+            $role = Role::where("slug", "patient")->first();
 
-            if (!$user)
-            {
-                $user = User::create([
-                    "clinic_id"   => $clinic->id,
-                    "external_id" => $login["external_id"],
-                    "name"        => explode(" ", $login["name"])[0],
-                    "full_name"   => $login["name"],
-                    "email"       => $request->email,
-                    "phone"       => $login["phone"] ?? null,
-                    "password"    => bcrypt($request->password . date("H:i:s")),
-                ]);
-
-                $role = Role::where("slug", "patient")->first();
-
-                $user->roles()->attach($role);
-
-                break;
-            }
-            else
-            {
-                $user->clinic_id   = $clinic->id;
-                $user->external_id = $login["external_id"];
-                $user->name        = explode(" ", $login["name"])[0];
-                $user->full_name   = $login["name"];
-                $user->phone       = $login["phone"] ?? null;
-                $user->password    = bcrypt($request->password . date("H:i:s"));
-                $user->save();
-                break;
-            }
+            $user->roles()->attach($role);
+        }
+        else
+        {
+            $user->clinic_id   = $clinic->id;
+            $user->external_id = $login["external_id"];
+            $user->name        = explode(" ", $login["name"])[0];
+            $user->full_name   = $login["name"];
+            $user->phone       = $login["phone"] ?? null;
+            $user->password    = bcrypt($request->password . date("H:i:s"));
+            $user->save();
         }
 
         if (!isset($user)) return self::redirectLogin(404);
