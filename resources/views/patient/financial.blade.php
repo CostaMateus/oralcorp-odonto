@@ -58,11 +58,6 @@
 
     </div>
 
-    {{-- remover qnd resolvido --}}
-    <p class="mt-4 mb-0 text-danger" >RPCGetPacienteMensalidade</p>
-    <p class="mb-0 text-danger" > -> ioc      -> independente dos parametros passados, retorna data 00/00/0000 e valor 0.0</p>
-    <p class="mb-0 text-danger" > -> aodonto2 -> independente dos parametros passados, retorna data 00/00/0000 e valor 0.0</p>
-    <p class="mb-0 text-danger" > -> amodonto -> independente dos parametros passados, retorna data 00/00/0000 e valor 0.0</p>
 @stop
 
 @include('patient.footer')

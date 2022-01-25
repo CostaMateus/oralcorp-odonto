@@ -36,11 +36,6 @@
 
     </div>
 
-    {{-- remover qnd resolvido --}}
-    <p class="mt-4 mb-0 text-danger" >RPCGetPacienteDesconto</p>
-    <p class="mb-0 text-danger" > -> ioc      -> retorna error</p>
-    <p class="mb-0 text-danger" > -> aodonto2 -> ok, apenas valores -1</p>
-    <p class="mb-0 text-danger" > -> amodonto -> ok, apenas valores -1</p>
 @stop
 
 @include('patient.footer')
