@@ -12,13 +12,17 @@
 @section('body_data', $layoutHelper->makeBodyData())
 
 @section('content_top_nav_left')
-    <li class="nav-item">
+    <li class="nav-item d-none d-sm-block">
         <a href="/" class="nav-link">Início</a>
     </li>
 @stop
 @section('content_top_nav_center')
     <li class="nav-item">
-        <img class="brand-image" src="{{ asset('images/logo/logo_b.png') }}" alt="Oral Corp" height="40" >
+        <img class="brand-image d-none d-sm-block" src="{{ asset('images/logo/logo_b.png') }}" alt="Oral Corp" height="40" >
+
+        <a href="/" class="d-block d-sm-none">
+            <img class="brand-image" src="{{ asset('images/logo/logo_b.png') }}" alt="Oral Corp" height="40" >
+        </a>
     </li>
 @stop
 
