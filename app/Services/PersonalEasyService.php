@@ -114,15 +114,30 @@ class PersonalEasyService
      */
     public function getUser(string $email, string $code)
     {
-        $data = [
-            "email" => $email,
-        ];
-
+        $data     = [ "email" => $email ];
         $response = $this->makeRequest("RPCGetPacienteEmail", $data, $code);
 
         if ($response["code"] != 200) return $response;
 
         PersonalEasyHelper::dataConverter("users", $response["data"]);
+
+        return $response;
+    }
+
+    /**
+     * Altera a senha do paciente
+     *
+     * @param string $password
+     * @return array
+     */
+    public function changePassword(string $password)
+    {
+        $data = [
+            "nropac" => auth()->user()->external_id,
+            "ssenha" => $password
+        ];
+
+        $response = $this->makeRequest("RPCPutPswPaciente", $data);
 
         return $response;
     }
@@ -135,11 +150,7 @@ class PersonalEasyService
      */
     public function getStartImage(string $patient_id = null)
     {
-        $data = [
-            // funciona tanto com nropac, com email qnt sem parametro nenhum,
-            // confirmar com Rogério
-            // "nropac" => $patient_id ?? auth()->user()->external_id,
-        ];
+        $data     = [ "nropac" => $patient_id ?? auth()->user()->external_id ];
 
         $response = $this->makeRequest("RPCGetPacienteImagemIni", $data);
 
@@ -154,11 +165,7 @@ class PersonalEasyService
      */
     public function getEndImage(string $patient_id = null)
     {
-        $data = [
-            // funciona tanto com nropac, com email qnt sem parametro nenhum,
-            // confirmar com Rogério
-            // "nropac" => $patient_id ?? auth()->user()->external_id,
-        ];
+        $data     = [ "nropac" => $patient_id ?? auth()->user()->external_id ];
 
         $response = $this->makeRequest("RPCGetPacienteImagemFin", $data);
 
@@ -174,11 +181,41 @@ class PersonalEasyService
      */
     public function getSchedule()
     {
-        $data = [
-            "nropac" => auth()->user()->external_id,
-        ];
+        $data     = [ "nropac" => auth()->user()->external_id, ];
 
         $response = $this->makeRequest("RPCGetPacienteAgenda", $data);
+
+        return $response;
+    }
+
+    public function postSchedule()
+    {
+
+
+    }
+
+    /**
+     * Consulta as opções de status que um agendamento pode ter
+     *
+     * @return void
+     */
+    public function getScheduleStatus()
+    {
+        $response = $this->makeRequest("RPCGetStatusAgenda");
+
+        return $response;
+    }
+
+    /**
+     * Altera o status de um agendamento
+     *
+     * @return void
+     */
+    public function postScheduleStatus()
+    {
+        $data     = [];
+
+        $response = $this->makeRequest("RPCGetStatusAgenda", $data);
 
         return $response;
     }
@@ -222,7 +259,7 @@ class PersonalEasyService
      */
     public function postCheckin(string $checkin)
     {
-        $data = [
+        $data     = [
             "nropac" => auth()->user()->external_id,
             "btsel"  => (int) $checkin
         ];
@@ -239,9 +276,7 @@ class PersonalEasyService
      */
     public function getDiscounts()
     {
-        $data = [
-            "nropac" => auth()->user()->external_id,
-        ];
+        $data     = [ "nropac" => auth()->user()->external_id, ];
 
         $response = $this->makeRequest("RPCGetPacienteDesconto", $data);
 
