@@ -30,7 +30,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $folder_view = auth()->user()->roles()->get()->first()->slug;
+        // $folder_view = auth()->user()->roles()->get()->first()->slug;
+        $folder_view = session("folder_view");
 
         return view("$folder_view.home");
     }
@@ -50,6 +51,8 @@ class HomeController extends Controller
     /**
      * Exibe tela de opções de contato com as unidades
      *
+     * @param Request $request
+     *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function contacts(Request $request)
@@ -57,6 +60,24 @@ class HomeController extends Controller
         $treatment = ($request->t) ? Helper::getTreatments()[$request->t]["title"] : "";
 
         return view("patient.contacts", compact(["treatment"]));
+    }
+
+    /**
+     * Envia mensagem para e-mail da clínica
+     *
+     * @param Request $request
+     *
+     * @return array
+     */
+    public function postContacts(Request $request)
+    {
+        $msg  = $request->input("message");
+
+        $mail = \Mail::to("costa.mack95@gmail.com")->send(new \App\Mail\Contact($msg));
+
+        $response["statusText"] = "Mensagem enviada com sucesso. Aguarde o contato de nossa equipe.";
+
+        return $response;
     }
 
     /**
@@ -156,6 +177,7 @@ class HomeController extends Controller
      * Envia o check-in do usuário para o P.E.
      *
      * @param Request $request
+     *
      * @return array
      */
     public function postCheckin(Request $request)
@@ -165,17 +187,6 @@ class HomeController extends Controller
         PersonalEasyHelper::dataConverter("postCheckin", $response["data"]);
 
         return $response["data"][0];
-    }
-
-    public function sendMessage(Request $request)
-    {
-        $msg  = $request->input("message");
-
-        $mail = \Mail::to("costa.mack95@gmail.com")->send(new \App\Mail\Contact($msg));
-
-        $response["statusText"] = "Mensagem enviada com sucesso. Aguarde o contato de nossa equipe.";
-
-        return $response;
     }
 
 }
