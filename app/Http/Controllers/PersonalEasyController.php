@@ -27,7 +27,7 @@ class PersonalEasyController extends Controller
 
         if ($login["password"] != $request->password) return self::redirectLogin(404);
 
-        $user     = User::firstWhere("email", $request->email);
+        $user     = User::firstWhere("email", $request->email)->load("roles");
 
         if (!$user)
         {
@@ -59,6 +59,8 @@ class PersonalEasyController extends Controller
         if (!isset($user)) return self::redirectLogin(404);
 
         auth()->loginUsingId($user->id);
+
+        session(["folder_view" => $user->roles->first()->slug]);
 
         return redirect("/");
     }
