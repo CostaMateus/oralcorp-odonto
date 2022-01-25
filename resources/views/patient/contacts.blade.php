@@ -102,7 +102,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "{{ route('patient.send.message') }}",
+                    url: "{{ route('patient.post.contacts') }}",
                     data: $(this).serialize(),
                     success: function ( data ) {
                         $("#cf-status").removeClass("d-none").addClass("text-success").html(data.statusText);
