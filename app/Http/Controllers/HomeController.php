@@ -150,7 +150,18 @@ class HomeController extends Controller
         $response = $this->service->getDiscounts();
         PersonalEasyHelper::dataConverter("discounts", $response["data"]);
 
-        $indicate = $response["data"][0];
+        if (isset($response["data"][0]))
+        {
+            $indicate = $response["data"][0];
+        }
+        else
+        {
+            $indicate = [
+                "indications_made"         => 0,
+                "discounts_received"       => 0,
+                "discounts_to_be_received" => 0
+            ];
+        }
 
         return view("patient.indicate", compact(["indicate"]));
     }
