@@ -19,7 +19,6 @@
                     @if (!empty($smile["start"]))
                         <a href="#" class="zoom">
                             <img src="{{ $smile["start"] }}" class="img-fluid w-50" alt="Sorriso antes">
-                            {{-- <img src="https://images-cdn.9gag.com/photo/a9ALB5j_700b.jpg" class="img-fluid w-50" alt="Sorriso antes"> --}}
                         </a>
                     @else
                         <h6 class="mb-4 text-muted">Imagem não cadastrada</h6>
@@ -36,7 +35,6 @@
                     @if (!empty($smile["end"]))
                         <a href="#" class="zoom">
                             <img src="{{ $smile["end"] }}" class="img-fluid w-50" alt="Sorriso depois">
-                            {{-- <img src="https://www.42frases.com.br/wp-content/uploads/2018/10/frases-dr-house.jpg" class="img-fluid w-50" alt="Sorriso depois"> --}}
                         </a>
                     @else
                         <h6 class="mb-4 text-muted">Imagem não cadastrada</h6>
@@ -58,12 +56,6 @@
 
     </div>
 
-    {{-- remover qnd resolvido --}}
-    <p class="mt-4 mb-0 text-danger" >RPCGetPacienteImagemIni</p>
-    <p class="mt-0 mb-0 text-danger" >RPCGetPacienteImagemFin</p>
-    <p class="mb-0 text-danger" > -> ioc      -> independente dos parametros passados, retorna vazio</p>
-    <p class="mb-0 text-danger" > -> aodonto2 -> independente dos parametros passados, retorna vazio</p>
-    <p class="mb-0 text-danger" > -> amodonto -> independente dos parametros passados, retorna vazio</p>
 @stop
 
 @include('patient.footer')
