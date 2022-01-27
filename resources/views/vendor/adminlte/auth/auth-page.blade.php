@@ -17,39 +17,41 @@
 
 @section('body')
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="align-content-center" >
 
-        {{-- Card Box --}}
-        <div class="card col-12 col-sm-10 col-md-5 col-lg-4 mx-auto p-0 {{ config('adminlte.classes_auth_card', 'card-outline card-primary') }}">
+            {{-- Card Box --}}
+            <div class="card col-12 col-sm-10 col-md-5 col-lg-4 mx-auto p-0 {{ config('adminlte.classes_auth_card', 'card-outline card-primary') }}">
 
-            {{-- Card Header --}}
-            @hasSection('auth_header')
-                <div class="card-header {{ config('adminlte.classes_auth_header', '') }}">
-                    <h3 class="card-title float-none text-center">
-                        @yield('auth_header')
-                    </h3>
+                {{-- Card Header --}}
+                @hasSection('auth_header')
+                    <div class="card-header {{ config('adminlte.classes_auth_header', '') }}">
+                        <h3 class="card-title float-none text-center">
+                            @yield('auth_header')
+                        </h3>
+                    </div>
+                @endif
+
+                {{-- Card Body --}}
+                <div class="rounded-top card-body {{ $auth_type ?? 'login' }}-card-body {{ config('adminlte.classes_auth_body', '') }}">
+                    @yield('auth_body')
                 </div>
-            @endif
 
-            {{-- Card Body --}}
-            <div class="rounded-top card-body {{ $auth_type ?? 'login' }}-card-body {{ config('adminlte.classes_auth_body', '') }}">
-                @yield('auth_body')
+                {{-- Card Footer --}}
+                @hasSection('auth_footer')
+                    <div class="card-footer {{ config('adminlte.classes_auth_footer', '') }}">
+                        @yield('auth_footer')
+                    </div>
+                @endif
+
             </div>
 
-            {{-- Card Footer --}}
-            @hasSection('auth_footer')
-                <div class="card-footer {{ config('adminlte.classes_auth_footer', '') }}">
-                    @yield('auth_footer')
+            @hasSection('footer')
+                <div class="col-12 col-sm-10 col-md-5 col-lg-4 mx-auto p-0">
+                    @yield('footer')
                 </div>
             @endif
 
         </div>
-
-        @hasSection('footer')
-            <div class="col-12 col-sm-10 col-md-5 col-lg-4 mx-auto p-0">
-                @yield('footer')
-            </div>
-        @endif
-
     </div>
 @stop
 
