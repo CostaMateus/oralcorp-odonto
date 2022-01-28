@@ -179,7 +179,7 @@ class PersonalEasyService
      * @param string $code
      * @return array
      */
-    public function getSchedule()
+    public function getUserSchedule()
     {
         $data     = [ "nropac" => auth()->user()->external_id, ];
 
@@ -188,37 +188,90 @@ class PersonalEasyService
         return $response;
     }
 
-    public function postSchedule()
+    public function getSchedules()
     {
+        $dtStart  = date("Y-m-d");
+        $dtEnd    = config("personaleasy.scheduleDays");
 
+        $code     = auth()->user()->clinic->code;
+        $id       = ($code == "ioc") ? 279 : (($code == "aodonto2") ? 273 : 255);
 
-    }
+        $data     = [
+            // "dt_data_ini" => "2021-11-01",
+            // "dt_data_fim" => "2021-12-01",
+            "dt_data_ini" => $dtStart,
+            "dt_data_fim" => date("Y-m-d", strtotime("$dtStart +$dtEnd days")),
+            "nprest"      => $id,
+            "nunid"       => 1
+        ];
 
-    /**
-     * Consulta as opções de status que um agendamento pode ter
-     *
-     * @return void
-     */
-    public function getScheduleStatus()
-    {
-        $response = $this->makeRequest("RPCGetStatusAgenda");
+        $response = $this->makeRequest("RPCGetHorariosLivres", $data);
+
+        if (isset($response["data"][0]["TX"])) unset($response["data"][0]);
 
         return $response;
     }
 
     /**
-     * Altera o status de um agendamento
+     * Cria um agendamento para o paciente
      *
-     * @return void
+     * @param integer $provider
+     * @param string $date
+     * @param string $hour
+     * @param string $reason
+     *
+     * @return array
      */
-    public function postScheduleStatus()
+    public function createSchedule(int $provider_id, array $dateHour, string $reason)
     {
-        $data     = [];
+        $data = [
+            "nprest"   => $provider_id,
+            "nunid"    => 1,
+            "nropac"   => (int) auth()->user()->external_id,
+            "ntpfone1" => 4,
+            "dt_data"  => $dateHour[0],
+            "shorario" => $dateHour[1],
+            "snome"    => auth()->user()->name,
+            "sfone1"   => auth()->user()->phone ?: "",
+            "smotivo"  => $reason
+        ];
 
-        $response = $this->makeRequest("RPCGetStatusAgenda", $data);
+        Log::info($data);
+
+        $response = $this->makeRequest("RPCCreateAgenda", $data);
 
         return $response;
     }
+
+    /**
+     * Cancela um agendamento do paciente
+     *
+     * @return void
+     */
+    public function cancelSchedule(string $schedule_id)
+    {
+        $data     = [
+            "id_agendamento"     => (int) $schedule_id,
+            "status_agendamento" => 16, // Desmarcou com antecedência
+        ];
+
+        $response = $this->makeRequest("RPCPutStatusAgenda", $data);
+
+        return $response;
+    }
+
+    // /**
+    //  * Consulta as opções de status que um agendamento pode ter
+    //  *
+    //  * @return void
+    //  */
+    // public function getScheduleStatus()
+    // {
+    //     $response = $this->makeRequest("RPCGetStatusAgenda");
+
+    //     return $response;
+    // }
+
 
     /**
      * Consulta Financeiro do Paciente
@@ -227,12 +280,7 @@ class PersonalEasyService
      */
     public function getFinancial()
     {
-        $data = [
-            // funciona tanto com nropac, com email qnt sem parametro nenhum,
-            // confirmar com Rogério
-            // "nropac" => auth()->user()->external_id,
-            // "email"  => auth()->user()->email,
-        ];
+        $data     = [ "nropac" => auth()->user()->external_id, ];
 
         $response = $this->makeRequest("RPCGetPacienteMensalidade", $data);
 
