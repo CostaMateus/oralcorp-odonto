@@ -250,28 +250,18 @@ class PersonalEasyService
      */
     public function cancelSchedule(string $schedule_id)
     {
+        $code     = auth()->user()->clinic->code;
+        $stt_code = ($code == "ioc") ? 7 : (($code == "aodonto2") ? 6 : 16);
+
         $data     = [
             "id_agendamento"     => (int) $schedule_id,
-            "status_agendamento" => 16, // Desmarcou com antecedência
+            "status_agendamento" => $stt_code, // Desmarcou com antecedência
         ];
 
         $response = $this->makeRequest("RPCPutStatusAgenda", $data);
 
         return $response;
     }
-
-    // /**
-    //  * Consulta as opções de status que um agendamento pode ter
-    //  *
-    //  * @return void
-    //  */
-    // public function getScheduleStatus()
-    // {
-    //     $response = $this->makeRequest("RPCGetStatusAgenda");
-
-    //     return $response;
-    // }
-
 
     /**
      * Consulta Financeiro do Paciente
