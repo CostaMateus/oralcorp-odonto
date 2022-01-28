@@ -25,22 +25,23 @@ Route::get("/cadastro-membro", [RegisterController::class, "showMemberRegistrati
 
 Route::middleware(["auth"])->group(function () {
 
-    Route::get("/",              [HomeController::class, "index"]);
-    Route::get("/home",          [HomeController::class, "index"])->name("home");
+    Route::get("/",                 [HomeController::class, "index"]);
+    Route::get("/home",             [HomeController::class, "index"])         ->name("home");
 
-    Route::get("/tratamentos",   [HomeController::class, "treatments"])->name("patient.treatments");
-    Route::get("/meus-sorrisos", [HomeController::class, "mySmiles"])  ->name("patient.my_smiles");
-    Route::get("/financeiro",    [HomeController::class, "financial"]) ->name("patient.financial");
-    Route::get("/indique",       [HomeController::class, "indicate"])  ->name("patient.indicate");
+    Route::get("/tratamentos",      [HomeController::class, "treatments"])    ->name("patient.treatments");
+    Route::get("/meus-sorrisos",    [HomeController::class, "mySmiles"])      ->name("patient.my_smiles");
+    Route::get("/financeiro",       [HomeController::class, "financial"])     ->name("patient.financial");
+    Route::get("/indique",          [HomeController::class, "indicate"])      ->name("patient.indicate");
 
-    Route::get("/agenda",        [HomeController::class, "schedule"])    ->name("patient.schedule");
-    Route::post("/agenda",       [HomeController::class, "postSchedule"])->name("patient.post.schedule");
+    Route::get( "/agenda",          [HomeController::class, "schedule"])      ->name("patient.schedule");
+    Route::post("/agenda/marcar",   [HomeController::class, "createSchedule"])->name("patient.create.schedule");
+    Route::post("/agenda/cancelar", [HomeController::class, "cancelSchedule"])->name("patient.cancel.schedule");
 
-    Route::get("/contatos",      [HomeController::class, "contacts"])    ->name("patient.contacts");
-    Route::post("/contatos",     [HomeController::class, "postContacts"])->name("patient.post.contacts");
+    Route::get( "/contatos",        [HomeController::class, "contacts"])      ->name("patient.contacts");
+    Route::post("/contatos",        [HomeController::class, "postContacts"])  ->name("patient.post.contacts");
 
-    Route::get("/checkin",       [HomeController::class, "checkin"])    ->name("patient.checkin");
-    Route::post("/checkin",      [HomeController::class, "postCheckin"])->name("patient.post.checkin");
+    Route::get( "/checkin",         [HomeController::class, "checkin"])       ->name("patient.checkin");
+    Route::post("/checkin",         [HomeController::class, "postCheckin"])   ->name("patient.post.checkin");
 
     Route::middleware(["role:admin"])->group(function () {
 
