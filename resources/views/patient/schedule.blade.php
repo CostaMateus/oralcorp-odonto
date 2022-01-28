@@ -171,7 +171,7 @@
                 <div class="modal-body">
                     <form id="new-appointment-form" class="text-center" >
                         @csrf
-                        <div class="row">
+                        <div id="naf-main" class="row">
                             <div class="col-12 col-md-6">
                                 @if (is_null(auth()->user()->phone))
                                     <div class="form-group col-8 mx-auto mb-3">
@@ -292,10 +292,12 @@
                             Confirmar agendamento
                         </button>
 
-                        <p id="naf-sending" class="mt-3 mb-0 d-none">
+                        <p id="naf-sending" class="d-none">
                             Agendando sua consulta <i class="ml-2 fas fa-spinner fa-spin"></i>
                         </p>
-                        <p id="naf-reload" class="mt-2 mb-0 d-none">A página recarregará automaticamente.</p>
+                        <p id="naf-reload" class="mb-0 d-none">
+                            A página recarregará automaticamente.
+                        </p>
                     </form>
                 </div>
             </div>
@@ -380,6 +382,7 @@
 
                 $("#error_hour").addClass("d-none");
 
+                $("#naf-main").addClass("d-none");
                 $("#naf-submit").addClass("d-none");
                 $("#naf-sending").removeClass("d-none");
 
@@ -412,8 +415,6 @@
                         setTimeout(function() {
                             window.location.reload();
                         }, 3500);
-
-                        // $("#naf-submit").removeClass("d-none");
                     }
                 });
 

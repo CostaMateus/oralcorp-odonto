@@ -24,16 +24,6 @@
 
     </div>
 
-    {{-- remover qnd resolvido --}}
-    <p class="mt-4 mb-0 text-danger" >RPCGetBT</p>
-    <p class="mb-0 text-danger" > -> ioc      -> retorna alguns dados vazios, dps de certa hora para de funcionar</p>
-    <p class="mb-0 text-danger" > -> aodonto2 -> não retorna dados</p>
-    <p class="mb-0 text-danger" > -> amodonto -> retorna muitos dados repetidos</p>
-    <p class="mt-4 mb-0 text-danger" >RPCPutBTSel</p>
-    <p class="mb-0 text-danger" > -> ioc      -> retorna error</p>
-    <p class="mb-0 text-danger" > -> aodonto2 -> retorna erro muito louco</p> <!-- "error": "{\"name\":\"RequestError\",\"message\":\"Invalid object name '__RBMB_REG_BT'.\",\"code\":\"EREQUEST\",\"number\":208,\"lineNumber\":49,\"state\":1,\"class\":16,\"serverName\":\"SERVIDOR\\\\EDS80\",\"procName\":\"spw_RPCPutBtSel\",\"precedingErrors\":[]}" -->
-    <p class="mb-0 text-danger" > -> amodonto -> retorna sucesso no checkin</p>
-
     <div id="modal-checkin" class="modal fade" aria-modal="true" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
