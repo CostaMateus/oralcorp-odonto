@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use Illuminate\Http\Request;
 use App\Helpers\PersonalEasyHelper;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Services\PersonalEasyService;
+use App\Http\Requests\ScheduleRequest;
 
 class HomeController extends Controller
 {
@@ -87,13 +89,70 @@ class HomeController extends Controller
      */
     public function schedule()
     {
-        $response     = $this->service->getSchedule();
+        $response1    = $this->service->getUserSchedule();
+        $response2    = $this->service->getSchedules();
 
-        PersonalEasyHelper::dataConverter("schedule", $response["data"]);
+        PersonalEasyHelper::dataConverter("userSchedule",  $response1["data"]);
+        PersonalEasyHelper::dataConverter("freeSchedules", $response2["data"]);
 
-        $appointments = $response["data"];
+        $appointments = $response1["data"];
+        $schedules    = Helper::treatValidSchedule($response2["data"]);
 
-        return view("patient.schedule", compact(["appointments"]));
+        return view("patient.schedule", compact(["appointments", "schedules"]));
+    }
+
+    public function createSchedule(ScheduleRequest $request)
+    {
+        $val_data    = $request->validated();
+
+        if (isset($val_data["phone"]))
+        {
+            auth()->user()->phone = $val_data["phone"];
+            auth()->user()->save();
+        }
+
+        $clinic_code = auth()->user()->clinic->code;
+        $provider_id = ($clinic_code == "ioc") ? 279 : (($clinic_code == "aodonto2") ? 273 : 255);
+        $dateHour    = Helper::convertDateHourSchedule($val_data["hour"]);
+
+        $response    = $this->service->createSchedule($provider_id, $dateHour, $val_data["reason"]);
+
+        PersonalEasyHelper::dataConverter("createSchedule",  $response["data"]);
+
+        Log::info($response);
+
+        if (is_null($response["data"][0]["schedule_id"]))
+        {
+            $response["code"]       = 400;
+            $response["statusText"] = "Não foi possível confirmar o agendamento. Tente novamente!";
+        }
+        else
+        {
+            $response["statusText"] = "Consulta agendada com sucesso.";
+        }
+
+        return $response;
+    }
+
+    public function cancelSchedule(Request $request)
+    {
+        $schedule_id = $request->input("schedule_id");
+
+        $response    = $this->service->cancelSchedule($schedule_id);
+
+        PersonalEasyHelper::dataConverter("cancelSchedule",  $response["data"]);
+
+        if (is_null($response["data"][0]["schedule_id"]))
+        {
+            $response["code"]       = 400;
+            $response["statusText"] = "Não foi possível cancelar o agendamento. Tente novamente!";
+        }
+        else
+        {
+            $response["statusText"] = "Consulta agendada, desmarcarda com sucesso.";
+        }
+
+        return $response;
     }
 
     /**
