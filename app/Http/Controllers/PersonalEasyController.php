@@ -27,7 +27,7 @@ class PersonalEasyController extends Controller
 
         if ($login["password"] != $request->password) return self::redirectLogin(404);
 
-        $user     = User::firstWhere("email", $request->email)->load("roles");
+        $user     = User::firstWhere("email", $request->email);
 
         if (!$user)
         {
@@ -47,6 +47,7 @@ class PersonalEasyController extends Controller
         }
         else
         {
+            $user->load("roles");
             $user->clinic_id   = $clinic->id;
             $user->external_id = $login["external_id"];
             $user->name        = explode(" ", $login["name"])[0];
