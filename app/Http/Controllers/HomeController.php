@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use Illuminate\Http\Request;
 use App\Helpers\PersonalEasyHelper;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Services\PersonalEasyService;
+use App\Http\Requests\ScheduleRequest;
 
 class HomeController extends Controller
 {
@@ -30,7 +32,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $folder_view = auth()->user()->roles()->get()->first()->slug;
+        // $folder_view = auth()->user()->roles()->get()->first()->slug;
+        $folder_view = session("folder_view");
 
         return view("$folder_view.home");
     }
@@ -50,6 +53,8 @@ class HomeController extends Controller
     /**
      * Exibe tela de opções de contato com as unidades
      *
+     * @param Request $request
+     *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function contacts(Request $request)
@@ -60,20 +65,94 @@ class HomeController extends Controller
     }
 
     /**
+     * Envia mensagem para e-mail da clínica
+     *
+     * @param Request $request
+     *
+     * @return array
+     */
+    public function postContacts(Request $request)
+    {
+        $msg  = $request->input("message");
+
+        $mail = \Mail::to("costa.mack95@gmail.com")->send(new \App\Mail\Contact($msg));
+
+        $response["statusText"] = "Mensagem enviada com sucesso. Aguarde o contato de nossa equipe.";
+
+        return $response;
+    }
+
+    /**
      * Exibe tela de consultas agendadas
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function schedule()
     {
+        $response1    = $this->service->getUserSchedule();
+        $response2    = $this->service->getSchedules();
 
-        $response = $this->service->getSchedule(Auth::user()->email);
+        PersonalEasyHelper::dataConverter("userSchedule",  $response1["data"]);
+        PersonalEasyHelper::dataConverter("freeSchedules", $response2["data"]);
 
-        $appointments = $response["data"];
+        $appointments = $response1["data"];
+        $schedules    = Helper::treatValidSchedule($response2["data"]);
 
-        return view("patient.schedule", compact([
-            "appointments"
-        ]));
+        return view("patient.schedule", compact(["appointments", "schedules"]));
+    }
+
+    public function createSchedule(ScheduleRequest $request)
+    {
+        $val_data    = $request->validated();
+
+        if (isset($val_data["phone"]))
+        {
+            auth()->user()->phone = $val_data["phone"];
+            auth()->user()->save();
+        }
+
+        $clinic_code = auth()->user()->clinic->code;
+        $provider_id = ($clinic_code == "ioc") ? 279 : (($clinic_code == "aodonto2") ? 273 : 255);
+        $dateHour    = Helper::convertDateHourSchedule($val_data["hour"]);
+
+        $response    = $this->service->createSchedule($provider_id, $dateHour, $val_data["reason"]);
+
+        PersonalEasyHelper::dataConverter("createSchedule",  $response["data"]);
+
+        Log::info($response);
+
+        if (is_null($response["data"][0]["schedule_id"]))
+        {
+            $response["code"]       = 400;
+            $response["statusText"] = "Não foi possível confirmar o agendamento. Tente novamente!";
+        }
+        else
+        {
+            $response["statusText"] = "Consulta agendada com sucesso.";
+        }
+
+        return $response;
+    }
+
+    public function cancelSchedule(Request $request)
+    {
+        $schedule_id = $request->input("schedule_id");
+
+        $response    = $this->service->cancelSchedule($schedule_id);
+
+        PersonalEasyHelper::dataConverter("cancelSchedule",  $response["data"]);
+
+        if (is_null($response["data"][0]["schedule_id"]))
+        {
+            $response["code"]       = 400;
+            $response["statusText"] = "Não foi possível cancelar o agendamento. Tente novamente!";
+        }
+        else
+        {
+            $response["statusText"] = "Consulta agendada, desmarcarda com sucesso.";
+        }
+
+        return $response;
     }
 
     /**
@@ -111,7 +190,7 @@ class HomeController extends Controller
      */
     public function financial()
     {
-        $response = $this->service->getFinancial();
+        $response  = $this->service->getFinancial();
 
         PersonalEasyHelper::dataConverter("financial", $response["data"]);
 
@@ -130,7 +209,18 @@ class HomeController extends Controller
         $response = $this->service->getDiscounts();
         PersonalEasyHelper::dataConverter("discounts", $response["data"]);
 
-        $indicate = $response["data"][0];
+        if (isset($response["data"][0]))
+        {
+            $indicate = $response["data"][0];
+        }
+        else
+        {
+            $indicate = [
+                "indications_made"         => 0,
+                "discounts_received"       => 0,
+                "discounts_to_be_received" => 0
+            ];
+        }
 
         return view("patient.indicate", compact(["indicate"]));
     }
@@ -142,6 +232,8 @@ class HomeController extends Controller
      */
     public function checkin()
     {
+        if (auth()->user()->clinic->code == "aodonto2") return redirect()->route("/");
+
         $response = $this->service->getCheckinOptions();
         PersonalEasyHelper::dataConverter("checkin", $response["data"]);
 
@@ -155,6 +247,7 @@ class HomeController extends Controller
      * Envia o check-in do usuário para o P.E.
      *
      * @param Request $request
+     *
      * @return array
      */
     public function postCheckin(Request $request)
@@ -164,17 +257,6 @@ class HomeController extends Controller
         PersonalEasyHelper::dataConverter("postCheckin", $response["data"]);
 
         return $response["data"][0];
-    }
-
-    public function sendMessage(Request $request)
-    {
-        $msg  = $request->input("message");
-
-        $mail = \Mail::to("costa.mack95@gmail.com")->send(new \App\Mail\Contact($msg));
-
-        $response["statusText"] = "Mensagem enviada com sucesso. Aguarde o contato de nossa equipe.";
-
-        return $response;
     }
 
 }

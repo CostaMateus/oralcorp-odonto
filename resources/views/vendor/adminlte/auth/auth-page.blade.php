@@ -13,11 +13,11 @@
     @yield('css')
 @stop
 
-@section('classes_body'){{ 'bg-oc vh-100' }}@stop
+@section('classes_body'){{ 'bg-oc py-2' }}@stop
 
 @section('body')
-    <div class="container d-flex flex-column justify-content-center h-100 w-100">
-        <div class="align-content-center">
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="align-content-center" >
 
             {{-- Card Box --}}
             <div class="card col-12 col-sm-10 col-md-5 col-lg-4 mx-auto p-0 {{ config('adminlte.classes_auth_card', 'card-outline card-primary') }}">

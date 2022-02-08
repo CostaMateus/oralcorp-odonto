@@ -2,7 +2,6 @@ on:
   push:
     branches:
       - main
-    # Enables manually triggering of Workflow with file synchronization option
   workflow_dispatch:
     inputs:
       sync:

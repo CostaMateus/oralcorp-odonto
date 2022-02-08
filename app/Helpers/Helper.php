@@ -84,4 +84,139 @@ class Helper
     //         return $a["NROPAC"] <= $b["NROPAC"];
     //     });
     // }
+
+    public static function convertDateHourSchedule(string $data)
+    {
+        $data = explode("_", $data);
+        $hour = $data[3];
+
+        unset($data[3]);
+
+        $date = implode("-", array_reverse($data));
+
+        return [ $date, $hour ];
+    }
+
+    public static function getConstHours()
+    {
+        return [
+            // "07:45",
+            "08:15", "08:45",
+            "09:15", "09:45",
+            "10:15", "10:45",
+            "11:15", "11:45",
+            "12:15", "12:45",
+            "13:15", "13:45",
+            "14:15", "14:45",
+            "15:15", "15:45",
+            "16:15", "16:45",
+            "17:15", "17:45",
+        ];
+    }
+
+    public static function makeIdSchedule(string $date, string $hour)
+    {
+        $date = str_replace("/", "_", self::formatDate($date));
+        return $date . "_" . $hour;
+    }
+
+    public static function treatValidSchedule(array $schedules)
+    {
+        $_DT_END = config("personaleasy.scheduleDays");
+        $_HOURS  = self::getConstHours();
+
+        $consultedDays = [];
+
+        foreach (range(0, $_DT_END, 1) as $i)
+        {
+            // $today = "2021-11-01";
+            $today = date("Y-m-d");
+            $date  = date("Y-m-d", strtotime("$today +$i day"));
+            $consultedDays[] = $date;
+        }
+
+        $temp = [];
+
+        foreach ($consultedDays as $date)
+        {
+            foreach ($schedules as $sch)
+            {
+                $hour    = $sch["hour"];
+
+                // Horarios de atendimento
+                if (!in_array($hour, $_HOURS)) continue;
+
+                $id        = self::formatDate($date);
+                $dayWeek   = self::getDayOfWeek($date);
+                $day       = self::isTodayTomorrow($date, $dayWeek);
+                $formatted = self::formatDay($date);
+
+                $temp[$id]["date"]         = $date;
+                $temp[$id]["day"]          = $day;
+                $temp[$id]["dayFormatted"] = $formatted;
+                $temp[$id]["dayWeek"]      = $dayWeek;
+
+                if ($date != $sch["date"])
+                {
+                    if (!isset($temp[$id]["hours"])) $temp[$id]["hours"] = [];
+
+                    continue;
+                }
+
+                $temp[$id]["hours"][] = $hour;
+            }
+        }
+
+        return $temp;
+    }
+
+    private static function formatDate(string $date)
+    {
+        return implode("/", array_reverse(explode("-", $date)));
+    }
+
+    private static function formatDay(string $date)
+    {
+        $date = explode("-", $date);
+        return $date[2] . "/" . $date[1];
+    }
+
+    private static function getDayOfWeek(string $date)
+    {
+        $day = date("l", strtotime($date));
+        switch ($day)
+        {
+            case "Sunday":
+                return "Dom";
+            break;
+            case "Monday":
+                return "Seg";
+            break;
+            case "Tuesday":
+                return "Ter";
+            break;
+            case "Wednesday":
+                return "Qua";
+            break;
+            case "Thursday":
+                return "Qui";
+            break;
+            case "Friday":
+                return "Sex";
+            break;
+            case "Saturday":
+                return "Sáb";
+            break;
+        }
+    }
+
+    private static function isTodayTomorrow(string $date, string $dayWeek)
+    {
+        if ($date == date("Y-m-d"))
+            return "Hoje";
+        else if ($date == date("Y-m-d", strtotime(date("Y-m-d") . " +1 day")))
+            return "Amanhã";
+        else
+            return $dayWeek;
+    }
 }

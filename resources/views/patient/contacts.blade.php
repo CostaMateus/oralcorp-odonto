@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <textarea class="form-control" id="message" name="message" rows="5" placeholder="Sua mensagem"></textarea>
                     </div>
-                    <button id="cf-submit" type="submit" class="btn btn-primary btn-oc">
+                    <button id="cf-submit" type="submit" class="btn btn-oc">
                         Enviar <i class="ml-2 d-none fas fa-spinner fa-spin text-white"></i>
                     </button>
 
@@ -102,7 +102,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "{{ route('patient.send.message') }}",
+                    url: "{{ route('patient.post.contacts') }}",
                     data: $(this).serialize(),
                     success: function ( data ) {
                         $("#cf-status").removeClass("d-none").addClass("text-success").html(data.statusText);
@@ -117,8 +117,7 @@
                         $("#cf-status").removeClass("d-none").addClass("text-danger").html("Ocorreu um erro, tente novamente!");
                         $("#cf-sending").addClass("d-none");
                         $("#cf-submit").removeClass("disabled").find("i").addClass("d-none");
-                        // window.location.reload();
-                        // setTimeout(function () { window.location.reload() }, 1500);
+                        setTimeout(function () { window.location.reload() }, 1500);
                     }
                 });
             });

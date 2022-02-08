@@ -15,102 +15,8 @@ class PersonalEasyHelper
     {
         if (empty($data)) return;
 
-        // $common = [
-        //     "NROPAC"  => "patient_id",
-        //     "PRINOM"  => "name",
-        //     "CELULAR" => "phone",
-        // ];
-
         switch ($option)
         {
-            // case 1:
-            //     $newKeys = [
-            //         "ULTAGE"       => "scheduled", // date
-            //         "PREST_ULTAGE" => "provider",  // string
-            //         "ST_ULTAGE"    => "status",    // string
-            //         "MOT_ULTAGE"   => "motive",    // string
-            //     ];
-
-            //     $newKeys = array_merge($common, $newKeys);
-
-            //     self::arrayReplaceKeys($data, $newKeys);
-            // break;
-
-            // case 2:
-            //     $newKeys = [
-            //         "AG7"            => "above",     // boolean
-            //         "PROXCONS"       => "scheduled", // date
-            //         "PREST_PROXCONS" => "provider",  // string
-            //         "ST_PROXCONS"    => "status",    // string
-            //         "MOT_PROXCONS"   => "motive",    // string
-            //     ];
-
-            //     $newKeys = array_merge($common, $newKeys);
-
-            //     self::arrayReplaceKeys($data, $newKeys);
-            // break;
-
-            // case 3:
-            //     $newKeys = [
-            //         "PROXCONS"       => "scheduled", // date
-            //         "PREST_PROXCONS" => "provider",  // string
-            //         "ULTHIS"         => "last_note", // string
-            //     ];
-
-            //     $newKeys = array_merge($common, $newKeys);
-
-            //     self::arrayReplaceKeys($data, $newKeys);
-            // break;
-
-            // case 4:
-            //     $newKeys = [
-            //         "PROXCONS" => "scheduled", // boolean
-            //         "VL_DEB"   => "overdue",   // boolean
-            //         "VL_VNP"   => "opened",    // boolean
-            //         "ULTHIS"   => "last_note", // string
-            //     ];
-
-            //     $newKeys = array_merge($common, $newKeys);
-
-            //     self::arrayReplaceKeys($data, $newKeys);
-            // break;
-
-            // case 5:
-            //     $newKeys = [
-            //         "RETORNO" => "scheduled", // boolean
-            //         "VL_DEB"  => "overdue",   // boolean
-            //         "VL_VNP"  => "opened",    // boolean
-            //         "ULTHIS"  => "last_note", // string
-            //     ];
-
-            //     $newKeys = array_merge($common, $newKeys);
-
-            //     self::arrayReplaceKeys($data, $newKeys);
-            // break;
-
-            // case "returnOpt":
-            //     $newKeys = [
-            //         "NM_RETORNO" => "name", // string
-            //     ];
-            //     self::arrayReplaceKeys($data, $newKeys);
-            // break;
-
-            // case "put":
-            //     $newKeys = [
-            //         "VL" => "statusCode", // string
-            //         "TX" => "statusText", // string
-            //     ];
-            //     self::arrayReplaceKeys($data, $newKeys);
-            // break;
-
-            // case "providers":
-            //     $newKeys = [
-            //         "ID_PRESTADOR" => "provider_id",   // int
-            //         "NM_PRESTADOR" => "provider_name", // string
-            //     ];
-            //     self::arrayReplaceKeys($data, $newKeys);
-            // break;
-
             case "users":
                 $newKeys = [
                     "nropac"   =>  "external_id",
@@ -128,9 +34,19 @@ class PersonalEasyHelper
                 self::arrayReplaceKeys($data, $newKeys);
             break;
 
-            case "schedule":
+            case "userSchedule":
                 $newKeys = [
-                    "horario" => "schedule",
+                    "horario"        => "schedule",
+                    "id_agendamento" => "schedule_id",
+                ];
+                self::arrayReplaceKeys($data, $newKeys);
+            break;
+
+            case "createSchedule":
+            case "cancelSchedule":
+                $newKeys = [
+                    "vl" => "schedule_id",
+                    "tx" => "statusText"
                 ];
                 self::arrayReplaceKeys($data, $newKeys);
             break;
@@ -156,8 +72,8 @@ class PersonalEasyHelper
                 $newKeys = [
                     "bt"       => "checkin_id",
                     "bt_descr" => "name",
-                    "bt_ag"    => "schedule",
-                    "bt_reag"  => "reschedule"
+                    // "bt_ag"    => "schedule",
+                    // "bt_reag"  => "reschedule"
                 ];
                 self::arrayReplaceKeys($data, $newKeys);
             break;
@@ -168,13 +84,21 @@ class PersonalEasyHelper
                 ];
                 self::arrayReplaceKeys($data, $newKeys);
             break;
+
+            case "freeSchedules":
+                $newKeys = [
+                    "data"    => "date",
+                    "horario" => "hour",
+                ];
+                self::arrayReplaceKeys($data, $newKeys);
+            break;
         }
 
     }
 
     private static function arrayReplaceKeys(array &$array, array $replacements)
     {
-        foreach ($array as &$arr)
+        foreach ($array as $key => &$arr)
         {
             foreach ($replacements as $old => $new)
             {
@@ -190,13 +114,31 @@ class PersonalEasyHelper
                     $arr[$new] = null;
                 }
 
-                // Separar a data e a hora
-                if ($new == "schedule")
+                // only case: userSchedule
+                if ($old == "horario" && $new == "schedule")
                 {
-                    if (strlen($arr[$new]) == 1)
-                        self::toBoolean($arr, $new, $arr[$new]);
-                    else
-                        self::convertDate($arr, $new, $arr[$new]);
+                    $aux = explode(" ", $arr[$new]);
+
+                    if ($aux[0] == "00/00/0000" || $aux[0] == "00/00/0001")
+                    {
+                        unset($array[$key]);
+                        continue;
+                    }
+
+                    $arr[$new] = [
+                        "date" => $aux[0],
+                        "hour" => $aux[1],
+                    ];
+                }
+
+                // only case: financial e freeSchedules
+                if ($old == "data" && $new == "date")
+                {
+                    if ($arr[$new] == "00/00/0000" || $arr[$new] == "00/00/0001")
+                    {
+                        unset($array[$key]);
+                        continue;
+                    }
                 }
 
                 // only case: discounts
@@ -204,56 +146,9 @@ class PersonalEasyHelper
                 {
                     $arr[$new] = ($arr[$new] >= 0) ? $arr[$new] : 0;
                 }
-
-                // // only cases: 1/2/3/4/5
-                // if ($new == "scheduled")
-                // {
-                //     if (strlen($arr[$new]) == 1)
-                //         self::toBoolean($arr, $new, $arr[$new]);
-                //     else
-                //         self::convertDate($arr, $new, $arr[$new]);
-                // }
-
-                // // only case: put
-                // if ($new == "statusCode")
-                // {
-                //     $arr[$new] = !empty($arr[$new]) ? (int) $arr[$new] : 0;
-                // }
-
-                // // only case: providers
-                // if ($new == "provider_id")
-                // {
-                //     $arr[$new] = (int) $arr[$new];
-                // }
             }
         }
 
         return $array;
-    }
-
-    private static function toBoolean(&$arr, $key, $value)
-    {
-        $arr[$key] = ($value == "S") ? 1 : 0;
-    }
-
-    /**
-     * Convert timestamp to date
-     * 2021-10-01T00:00:00 -> 01/10/2021
-     *
-     * @param array $arr
-     * @param string $key
-     * @param string $value
-     * @return void
-     */
-    private static function convertDate(&$arr, $key, $value)
-    {
-        $arr[$key] = !empty($value) ? explode(" ", $value) : "";
-    }
-
-    private static function usort(&$data)
-    {
-        usort($data, function($a, $b) {
-            return $a["patient_id"] <= $b["patient_id"];
-        });
     }
 }

@@ -114,15 +114,30 @@ class PersonalEasyService
      */
     public function getUser(string $email, string $code)
     {
-        $data = [
-            "email" => $email,
-        ];
-
+        $data     = [ "email" => $email ];
         $response = $this->makeRequest("RPCGetPacienteEmail", $data, $code);
 
         if ($response["code"] != 200) return $response;
 
         PersonalEasyHelper::dataConverter("users", $response["data"]);
+
+        return $response;
+    }
+
+    /**
+     * Altera a senha do paciente
+     *
+     * @param string $password
+     * @return array
+     */
+    public function changePassword(string $password)
+    {
+        $data = [
+            "nropac" => auth()->user()->external_id,
+            "ssenha" => $password
+        ];
+
+        $response = $this->makeRequest("RPCPutPswPaciente", $data);
 
         return $response;
     }
@@ -135,11 +150,7 @@ class PersonalEasyService
      */
     public function getStartImage(string $patient_id = null)
     {
-        $data = [
-            // funciona tanto com nropac, com email qnt sem parametro nenhum,
-            // confirmar com Rogério
-            // "nropac" => $patient_id ?? auth()->user()->external_id,
-        ];
+        $data     = [ "nropac" => $patient_id ?? auth()->user()->external_id ];
 
         $response = $this->makeRequest("RPCGetPacienteImagemIni", $data);
 
@@ -154,11 +165,7 @@ class PersonalEasyService
      */
     public function getEndImage(string $patient_id = null)
     {
-        $data = [
-            // funciona tanto com nropac, com email qnt sem parametro nenhum,
-            // confirmar com Rogério
-            // "nropac" => $patient_id ?? auth()->user()->external_id,
-        ];
+        $data     = [ "nropac" => $patient_id ?? auth()->user()->external_id ];
 
         $response = $this->makeRequest("RPCGetPacienteImagemFin", $data);
 
@@ -172,17 +179,86 @@ class PersonalEasyService
      * @param string $code
      * @return array
      */
-    public function getSchedule(string $email)
+    public function getUserSchedule()
     {
-        $data = [
-            "email" => $email,
+        $data     = [ "nropac" => auth()->user()->external_id, ];
+
+        $response = $this->makeRequest("RPCGetPacienteAgenda", $data);
+
+        return $response;
+    }
+
+    public function getSchedules()
+    {
+        $dtStart  = date("Y-m-d");
+        $dtEnd    = config("personaleasy.scheduleDays");
+
+        $code     = auth()->user()->clinic->code;
+        $id       = ($code == "ioc") ? 279 : (($code == "aodonto2") ? 273 : 255);
+
+        $data     = [
+            // "dt_data_ini" => "2021-11-01",
+            // "dt_data_fim" => "2021-12-01",
+            "dt_data_ini" => $dtStart,
+            "dt_data_fim" => date("Y-m-d", strtotime("$dtStart +$dtEnd days")),
+            "nprest"      => $id,
+            "nunid"       => 1
         ];
 
-        $code = auth()->user()->clinic->code;
+        $response = $this->makeRequest("RPCGetHorariosLivres", $data);
 
-        $response = $this->makeRequest("RPCGetPacienteAgenda", $data, $code);
+        if (isset($response["data"][0]["TX"])) unset($response["data"][0]);
 
-        PersonalEasyHelper::dataConverter("schedule", $response["data"]);
+        return $response;
+    }
+
+    /**
+     * Cria um agendamento para o paciente
+     *
+     * @param integer $provider
+     * @param string $date
+     * @param string $hour
+     * @param string $reason
+     *
+     * @return array
+     */
+    public function createSchedule(int $provider_id, array $dateHour, string $reason)
+    {
+        $data = [
+            "nprest"   => $provider_id,
+            "nunid"    => 1,
+            "nropac"   => (int) auth()->user()->external_id,
+            "ntpfone1" => 4,
+            "dt_data"  => $dateHour[0],
+            "shorario" => $dateHour[1],
+            "snome"    => auth()->user()->name,
+            "sfone1"   => auth()->user()->phone ?: "",
+            "smotivo"  => $reason
+        ];
+
+        Log::info($data);
+
+        $response = $this->makeRequest("RPCCreateAgenda", $data);
+
+        return $response;
+    }
+
+    /**
+     * Cancela um agendamento do paciente
+     *
+     * @return void
+     */
+    public function cancelSchedule(string $schedule_id)
+    {
+        $code     = auth()->user()->clinic->code;
+        $stt_code = ($code == "ioc") ? 7 : (($code == "aodonto2") ? 6 : 16);
+
+        $data     = [
+            "id_agendamento"     => (int) $schedule_id,
+            "status_agendamento" => $stt_code, // Desmarcou com antecedência
+        ];
+
+        $response = $this->makeRequest("RPCPutStatusAgenda", $data);
 
         return $response;
     }
@@ -194,12 +270,7 @@ class PersonalEasyService
      */
     public function getFinancial()
     {
-        $data = [
-            // funciona tanto com nropac, com email qnt sem parametro nenhum,
-            // confirmar com Rogério
-            // "nropac" => auth()->user()->external_id,
-            // "email"  => auth()->user()->email,
-        ];
+        $data     = [ "nropac" => auth()->user()->external_id, ];
 
         $response = $this->makeRequest("RPCGetPacienteMensalidade", $data);
 
@@ -226,7 +297,7 @@ class PersonalEasyService
      */
     public function postCheckin(string $checkin)
     {
-        $data = [
+        $data     = [
             "nropac" => auth()->user()->external_id,
             "btsel"  => (int) $checkin
         ];
@@ -243,9 +314,7 @@ class PersonalEasyService
      */
     public function getDiscounts()
     {
-        $data = [
-            "nropac" => auth()->user()->external_id,
-        ];
+        $data     = [ "nropac" => auth()->user()->external_id, ];
 
         $response = $this->makeRequest("RPCGetPacienteDesconto", $data);
 

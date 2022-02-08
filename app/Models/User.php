@@ -49,4 +49,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Clinic::class);
     }
+
+    /**
+     * The roles that belong to the user.
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, "users_roles");
+    }
 }

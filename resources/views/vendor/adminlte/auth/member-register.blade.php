@@ -19,7 +19,7 @@
 
 @section('auth_body')
     <div class="login-logo text-center mb-3">
-        <img src="{{ asset("images/logo/logo_b.png") }}" alt="Oral Corp" class="w-100">
+        <img src="{{ asset("images/logo/logo_b.png") }}" alt="Oral Corp" class="w-75">
     </div>
 
     <form action="{{ $register_url }}" method="post">
@@ -108,7 +108,7 @@
 @stop
 
 @section("footer")
-    <footer class="py-3 text-center text-white" >
+    <footer class="pt-3 text-center text-white" >
         <p class="h6 mb-0" >&copy; {{ date("Y") }} ORAL CORP ODONTO LTDA – 08.473.814.0001-55. Todos os direitos reservados. Proibida cópia ou reprodução sem autorização.</p>
         <small class="mb-0" >
             Powered by

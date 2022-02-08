@@ -27,7 +27,7 @@
                 <p class="mb-2" >3) Você será notificado pelo app que ganhou o desconto, caso o seu amigo inicie o tratamento ortodôntico conosco.</p>
                 <p class="mb-0" >Entendeu? Que tal indicar um amigo agora?</p>
 
-                {{-- <button class="btn btn-primary btn-oc" data-toggle="modal" data-target="#modal-default">Indicar</button> --}}
+                {{-- <button class="btn btn-oc" data-toggle="modal" data-target="#modal-default">Indicar</button> --}}
             </div>
             <div class="col-12 col-lg-6 py-3 pr-4 pl-3 text-center d-flex align-items-center">
                 <img class="img-fluid w-80" src="{{ asset('images/indique.png') }}" alt="Tratamento">
@@ -36,11 +36,6 @@
 
     </div>
 
-    {{-- remover qnd resolvido --}}
-    <p class="mt-4 mb-0 text-danger" >RPCGetPacienteDesconto</p>
-    <p class="mb-0 text-danger" > -> ioc      -> retorna error</p>
-    <p class="mb-0 text-danger" > -> aodonto2 -> ok, apenas valores -1</p>
-    <p class="mb-0 text-danger" > -> amodonto -> ok, apenas valores -1</p>
 @stop
 
 @include('patient.footer')
