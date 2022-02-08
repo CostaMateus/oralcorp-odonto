@@ -3,13 +3,13 @@
 return [
     'name' => 'Oral Corp',
     'manifest' => [
-        'name'             => env('APP_NAME', 'Oral Corp'),
-        'short_name'       => 'OC',
+        'name'             => env('APP_NAME', 'OralCorp'),
+        'short_name'       => 'OralCorp',
         'start_url'        => '/',
         'background_color' => '#FFF',
         'theme_color'      => '#000',
         'display'          => 'standalone',
-        'orientation'      => 'any',
+        'orientation'      => 'portrait',
         'status_bar'       => 'white',
         'icons'            => [
             '72x72'   => [
@@ -59,20 +59,21 @@ return [
         ],
         'shortcuts' => [
             [
-                'name'        => 'Shortcut Link 1',
-                'description' => 'Shortcut Link 1 Description',
-                'url'         => '/shortcutlink1',
-                'icons'       => [
-                    "src"     => "/images/icons/icon-72x72.png",
-                    "purpose" => "any"
-                ]
+                'name'        => 'Agenda',
+                'description' => 'Meus horários marcados',
+                'url'         => '/agenda',
             ],
             [
-                'name'        => 'Shortcut Link 2',
-                'description' => 'Shortcut Link 2 Description',
-                'url'         => '/shortcutlink2'
+                'name'        => 'Contatos',
+                'description' => 'Nossos contatos',
+                'url'         => '/contatos'
+            ],
+            [
+                'name'        => 'Tratamentos',
+                'description' => 'Nossos tratamentos',
+                'url'         => '/tratamentos'
             ]
         ],
-        'custom' => []
+        // 'custom' => []
     ]
 ];
