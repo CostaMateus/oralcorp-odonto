@@ -1,12 +1,12 @@
 @extends('adminlte::page')
 
-@section("title_prefix", "Contatos")
+@section("title_prefix", "Nossos contatos")
 @section("title")
 @section("title_posfix")
 
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Contatos</h1>
+    <h1 class="m-0 text-dark">Nossos contatos</h1>
 @stop
 
 @section('content')
