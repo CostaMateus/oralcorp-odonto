@@ -15,7 +15,7 @@
 
         <div class="row">
             <div class="col-12 py-3 px-4">
-                <h5>Faça seu check-in pelo site e evite filas e aglomerações</h5>
+                <h5>Faça seu check-in por aqui e evite filas e aglomerações</h5>
                 <p>Lembre-se, você precisa estar na clínica para fazer o Check-in</p>
                 <button id="make-checkin" type="button" class="btn btn-oc" >Fazer check-in</button>
                 <p id="cf-status" class="mt-3 mb-0 d-none" ></p>
