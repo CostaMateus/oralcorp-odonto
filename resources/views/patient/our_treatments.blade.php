@@ -1,5 +1,9 @@
 @extends('adminlte::page')
 
+@section('meta_tags')
+    <meta name="description" content="Nossos tratamentos | Área de paciente da Oral Corp" />
+@stop
+
 @section("title_prefix", "Nossos tratamentos")
 @section("title")
 @section("title_posfix")

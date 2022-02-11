@@ -1,5 +1,9 @@
 @extends('adminlte::page')
 
+@section('meta_tags')
+    <meta name="description" content="Check-in | Área de paciente da Oral Corp" />
+@stop
+
 @section("title_prefix", "Check-in")
 @section("title")
 @section("title_posfix")

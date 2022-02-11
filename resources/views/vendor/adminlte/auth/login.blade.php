@@ -1,5 +1,9 @@
 @extends('adminlte::auth.auth-page', ['auth_type' => 'login'])
 
+@section('meta_tags')
+    <meta name="description" content="Login | Área de paciente da Oral Corp" />
+@stop
+
 @section("title_prefix", "Login")
 @section("title")
 @section("title_posfix")

@@ -4,18 +4,37 @@
 <head>
 
     {{-- Base Meta Tags --}}
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"                                                      />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"                                                                    />
+    <meta name="csrf-token" content="{{ csrf_token() }}"                                                                    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=0" />
 
     {{-- Custom Meta Tags --}}
     @yield('meta_tags')
+    <meta name="keywords" content="Site; Oral Corp; Dentista; Clinicas Odontológicas; Clinicas; Campinas SP, Campinas" />
+    <meta name="author"   content="Mateus Costa & Filipe Ferreira"                                                     />
+
+    {{-- Facebook integration --}}
+    <meta property="og:title"            content="{{ config('app.name', 'Oral Corp') }}"                 />
+    <meta property="og:description"      content="{{ config('app.name', 'Oral Corp') }}"                 />
+    <meta property="og:url"              content="https://app.oralcorp.com.br/"                          />
+    <meta property="og:image"            content="https://app.oralcorp.com.br/images/logo/favicon_b.png" />
+    <meta property="og:image:secure_url" content="https://app.oralcorp.com.br/images/logo/favicon_b.png" />
+    <meta property="og:image:type"       content="image/png"                                             />
+    <meta property="og:type"             content="website"                                               />
+    <meta property="og:locale"           content="pt-BR"                                                 />
+    <meta property="og:site_name"        content="{{ config('app.name', 'Oral Corp') }}"                 />
+
+    {{-- Twitter integration --}}
+    <meta name="twitter:title" content="{{ config('app.name', 'Oral Corp') }}"                 />
+    <meta name="twitter:url"   content="https://app.oralcorp.com.br/"                          />
+    <meta name="twitter:image" content="https://app.oralcorp.com.br/images/logo/favicon_b.png" />
+    <meta name="twitter:card"  content="https://app.oralcorp.com.br/images/logo/favicon_b.png" />
 
     {{-- Title --}}
     <title>
-        @yield('title_prefix', config('adminlte.title_prefix', ''))
-        @yield('title', config('adminlte.title', 'AdminLTE 3'))
+        @yield('title_prefix',  config('adminlte.title_prefix',  ''))
+        @yield('title',         config('adminlte.title',        '|'))
         @yield('title_postfix', config('adminlte.title_postfix', ''))
     </title>
 
