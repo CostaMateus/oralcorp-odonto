@@ -1,9 +1,12 @@
 @extends('adminlte::page')
 
+@section('meta_tags')
+    <meta name="description" content="Nossos contatos | Área de paciente da Oral Corp" />
+@stop
+
 @section("title_prefix", "Nossos contatos")
 @section("title")
 @section("title_posfix")
-
 
 @section('content_header')
     <h1 class="m-0 text-dark">Nossos contatos</h1>
