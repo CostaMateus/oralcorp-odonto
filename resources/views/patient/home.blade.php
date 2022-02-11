@@ -18,7 +18,7 @@
 
 @section('preloader')
     <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src="{{ asset('images/logo/logo_b.png') }}" alt="Oral Corp" height="60" width="180">
+        <img class="animation__shake" src="{{ asset('images/logo/logo_b.webp') }}" alt="Oral Corp" height="60" width="180">
     </div>
 @stop
 

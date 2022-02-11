@@ -34,7 +34,7 @@
                 {{-- <button class="btn btn-oc" data-toggle="modal" data-target="#modal-default">Indicar</button> --}}
             </div>
             <div class="col-12 col-lg-6 py-3 pr-4 pl-3 text-center d-flex align-items-center">
-                <img class="img-fluid w-80" src="{{ asset('images/indique.png') }}" alt="Tratamento">
+                <img class="img-fluid w-80" src="{{ asset('images/indique.webp') }}" alt="Tratamento">
             </div>
         </div>
 

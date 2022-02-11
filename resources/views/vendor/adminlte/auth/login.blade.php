@@ -30,7 +30,7 @@
 
 @section('auth_body')
     <div class="login-logo text-center mb-3">
-        <img src="{{ asset("images/logo/logo_b.png") }}" alt="Oral Corp" class="w-75">
+        <img src="{{ asset("images/logo/logo_b.webp") }}" alt="Oral Corp" class="w-75">
     </div>
 
     @error("status")

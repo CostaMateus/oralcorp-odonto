@@ -18,10 +18,10 @@
 @stop
 @section('content_top_nav_center')
     <li class="nav-item">
-        <img class="brand-image d-none d-sm-block" src="{{ asset('images/logo/logo_b.png') }}" alt="Oral Corp" height="40" >
+        <img class="brand-image d-none d-sm-block" src="{{ asset('images/logo/logo_b.webp') }}" alt="Oral Corp" height="40" >
 
         <a href="/" class="d-block d-sm-none">
-            <img class="brand-image" src="{{ asset('images/logo/logo_b.png') }}" alt="Oral Corp" height="40" >
+            <img class="brand-image" src="{{ asset('images/logo/logo_b.webp') }}" alt="Oral Corp" height="40" >
         </a>
     </li>
 @stop
