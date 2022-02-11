@@ -15,21 +15,21 @@
     <meta name="author"   content="Mateus Costa & Filipe Ferreira"                                                     />
 
     {{-- Facebook integration --}}
-    <meta property="og:title"            content="{{ config('app.name', 'Oral Corp') }}"                 />
-    <meta property="og:description"      content="{{ config('app.name', 'Oral Corp') }}"                 />
-    <meta property="og:url"              content="https://app.oralcorp.com.br/"                          />
-    <meta property="og:image"            content="https://app.oralcorp.com.br/images/logo/favicon_b.png" />
-    <meta property="og:image:secure_url" content="https://app.oralcorp.com.br/images/logo/favicon_b.png" />
-    <meta property="og:image:type"       content="image/png"                                             />
-    <meta property="og:type"             content="website"                                               />
-    <meta property="og:locale"           content="pt-BR"                                                 />
-    <meta property="og:site_name"        content="{{ config('app.name', 'Oral Corp') }}"                 />
+    <meta property="og:title"            content="{{ config('app.name', 'Oral Corp') }}"                />
+    <meta property="og:description"      content="{{ config('app.name', 'Oral Corp') }}"                />
+    <meta property="og:url"              content="https://app.oralcorp.com.br/"                         />
+    <meta property="og:image"            content="https://app.oralcorp.com.br/images/logo/favicon.webp" />
+    <meta property="og:image:secure_url" content="https://app.oralcorp.com.br/images/logo/favicon.webp" />
+    <meta property="og:image:type"       content="image/webp"                                           />
+    <meta property="og:type"             content="website"                                              />
+    <meta property="og:locale"           content="pt-BR"                                                />
+    <meta property="og:site_name"        content="{{ config('app.name', 'Oral Corp') }}"                />
 
     {{-- Twitter integration --}}
-    <meta name="twitter:title" content="{{ config('app.name', 'Oral Corp') }}"                 />
-    <meta name="twitter:url"   content="https://app.oralcorp.com.br/"                          />
-    <meta name="twitter:image" content="https://app.oralcorp.com.br/images/logo/favicon_b.png" />
-    <meta name="twitter:card"  content="https://app.oralcorp.com.br/images/logo/favicon_b.png" />
+    <meta name="twitter:title" content="{{ config('app.name', 'Oral Corp') }}"                />
+    <meta name="twitter:url"   content="https://app.oralcorp.com.br/"                         />
+    <meta name="twitter:image" content="https://app.oralcorp.com.br/images/logo/favicon.webp" />
+    <meta name="twitter:card"  content="https://app.oralcorp.com.br/images/logo/favicon.webp" />
 
     {{-- Title --}}
     <title>

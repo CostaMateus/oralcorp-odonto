@@ -26,7 +26,7 @@
                         </a>
                     @else
                         <h6 class="mb-4 text-muted">Imagem não cadastrada</h6>
-                        <img src="{{ asset('images/no_image.png') }}" class="img-fluid w-50" alt="Sorriso antes">
+                        <img src="{{ asset('images/no_image.webp') }}" class="img-fluid w-50" alt="Sorriso antes">
                     @endif
                 </div>
             </div>
@@ -42,7 +42,7 @@
                         </a>
                     @else
                         <h6 class="mb-4 text-muted">Imagem não cadastrada</h6>
-                        <img src="{{ asset('images/no_image.png') }}" class="img-fluid w-50" alt="Sorriso depois">
+                        <img src="{{ asset('images/no_image.webp') }}" class="img-fluid w-50" alt="Sorriso depois">
                     @endif
                 </div>
             </div>
