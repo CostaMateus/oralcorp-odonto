@@ -194,7 +194,7 @@ class PersonalEasyService
         $dtEnd    = config("personaleasy.scheduleDays");
 
         $code     = auth()->user()->clinic->code;
-        $id       = ($code == "ioc") ? 279 : (($code == "aodonto2") ? 273 : 255);
+        $id       = ($code == "ioc") ? 279 : (($code == "aodonto2") ? 273 : 340);
 
         $data     = [
             // "dt_data_ini" => "2021-11-01",

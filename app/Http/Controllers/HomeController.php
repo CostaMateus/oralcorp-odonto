@@ -112,7 +112,7 @@ class HomeController extends Controller
         }
 
         $clinic_code = auth()->user()->clinic->code;
-        $provider_id = ($clinic_code == "ioc") ? 279 : (($clinic_code == "aodonto2") ? 273 : 255);
+        $provider_id = ($clinic_code == "ioc") ? 279 : (($clinic_code == "aodonto2") ? 273 : 340);
         $dateHour    = Helper::convertDateHourSchedule($val_data["hour"]);
 
         $response    = $this->service->createSchedule($provider_id, $dateHour, $val_data["reason"]);
