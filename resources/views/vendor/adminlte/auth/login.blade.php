@@ -92,11 +92,11 @@
 
 @section('auth_footer')
     {{-- Register link --}}
-    @if($register_url)
+    {{-- @if($register_url)
         <p class="my-0 float-left">
             <a class="text-oc" href="{{ $register_url }}">Me cadastrar</a>
         </p>
-    @endif
+    @endif --}}
 
     {{-- Password reset link --}}
     @if($password_reset_url)

@@ -17,7 +17,7 @@ use Composer\Command\HomeCommand;
 |
 */
 
-Auth::routes();
+Auth::routes(["register" => false]);
 
 Route::post("/login", [PersonalEasyController::class, "login"]);
 
