@@ -130,14 +130,14 @@ class PersonalEasyService
      * @param string $password
      * @return array
      */
-    public function changePassword(string $password)
+    public function changePassword(string $password, string $external_id = null, string $code = null)
     {
         $data = [
-            "nropac" => auth()->user()->external_id,
+            "nropac" => $external_id ?? auth()->user()->external_id,
             "ssenha" => $password
         ];
 
-        $response = $this->makeRequest("RPCPutPswPaciente", $data);
+        $response = $this->makeRequest("RPCPutPswPaciente", $data, $code);
 
         return $response;
     }
