@@ -19,10 +19,11 @@ use Composer\Command\HomeCommand;
 
 Auth::routes(["register" => false]);
 
-Route::post("/login",    [PersonalEasyController::class, "login"]);
+Route::post("/login", [PersonalEasyController::class, "login"]);
 
-Route::get( "/newpass",  [PersonalEasyController::class, "newPassword"]) ->name("new.password");
-Route::post("/savepass", [PersonalEasyController::class, "savePassword"])->name("save.password");
+Route::get( "/newpass",        [PersonalEasyController::class, "newPassword"])  ->name("new.password");
+Route::post("/savepass",       [PersonalEasyController::class, "savePassword"]) ->name("save.password");
+Route::post("/password/reset", [PersonalEasyController::class, "resetPassword"])->name("reset.password");
 
 Route::get("/cadastro-membro", [RegisterController::class, "showMemberRegistrationForm"])->name("member.register");
 

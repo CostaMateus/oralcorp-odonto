@@ -7,9 +7,13 @@ use App\Models\User;
 use App\Models\Clinic;
 use App\Helpers\Helper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use App\Services\PersonalEasyService;
 use App\Http\Requests\NewPasswordRequest;
 use App\Http\Requests\PersonalEasyRequest;
+use App\Http\Requests\ResetPasswordRequest;
 
 class PersonalEasyController extends Controller
 {
@@ -127,6 +131,51 @@ class PersonalEasyController extends Controller
         return redirect("/");
     }
 
+    public function resetPassword(ResetPasswordRequest $request)
+    {
+        $status_error = "Link de redefinição de senha expirou. Solicite outro abaixo.";
+
+        $token        = DB::table("password_resets")->where("email", $request->email)->first();
+
+        if (!$token)
+            return redirect("/password/reset")->with("status_error", $status_error);
+
+        $valid_limit  = Carbon::parse($token->created_at)->addHours(1);
+
+        if ($valid_limit < Carbon::now())
+        {
+            DB::table("password_resets")->where("email", $request->email)->delete();
+            return redirect("/password/reset")->with("status_error", $status_error);
+        }
+
+        if (!Hash::check($request->token, $token->token))
+        {
+            $status_error = "Link de redefinição de senha inválido. Solicite outro abaixo.";
+            return redirect("/password/reset")->with("status_error", $status_error);
+        }
+
+        $user     = User::where("email", $request->email)->first();
+        $clinic   = Clinic::find($user->clinic_id);
+
+        $response = (new PersonalEasyService)->changePassword($request->password, $user->external_id, $clinic->code);
+
+        if ($response["code"] != 200)
+        {
+            DB::table("password_resets")->where("email", $request->email)->delete();
+
+            $status_error = "Redefinição de senha falhou. Tente novamente.";
+            return redirect("/password/reset")->with("status_error", $status_error);
+        }
+
+        $user->password = bcrypt($request->password . date("H:i:s"));
+        $user->save();
+
+        auth()->loginUsingId($user->id);
+
+        session(["folder_view" => $user->roles->first()->slug]);
+
+        return redirect("/");
+    }
 
     private static function redirectLogin($code)
     {
