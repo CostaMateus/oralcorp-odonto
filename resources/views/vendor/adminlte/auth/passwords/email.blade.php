@@ -21,6 +21,10 @@
         <div class="alert alert-success">
             {{ session('status') }}
         </div>
+    @elseif (session('status_error'))
+        <div class="alert alert-warning">
+            {!! session('status_error') !!}
+        </div>
     @endif
 
     <form action="{{ $password_email_url }}" method="post">

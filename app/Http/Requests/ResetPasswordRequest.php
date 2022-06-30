@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class NewPasswordRequest extends FormRequest
+class ResetPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,9 @@ class NewPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-
-            "external_id"           => "required|string",
-            "clinic_id"             => "required|string",
-            "email"                 => "required|string",
-            "phone"                 => "nullable|string",
-            "name"                  => "required|string",
-            "password"              => "required|min:8|confirmed",
+            "token"    => "required",
+            "email"    => "required|email|exists:users,email",
+            "password" => "required|min:8|confirmed",
         ];
     }
 
@@ -42,8 +38,8 @@ class NewPasswordRequest extends FormRequest
     public function messages()
     {
         return [
-            "password.required"              => "Informe uma senha",
-            "password.min"                   => "A senha deve ter no mínimo 8 dígitos",
+            "password.required" => "Informe uma senha",
+            "password.min"      => "A senha deve ter no mínimo 8 dígitos",
         ];
     }
 }
