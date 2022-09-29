@@ -167,6 +167,8 @@ class PersonalEasyController extends Controller
             return redirect("/password/reset")->with("status_error", $status_error);
         }
 
+        DB::table("password_resets")->where("email", $request->email)->delete();
+
         $user->password = bcrypt($request->password . date("H:i:s"));
         $user->save();
 
